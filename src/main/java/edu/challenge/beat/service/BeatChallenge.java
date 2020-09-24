@@ -35,7 +35,9 @@ public class BeatChallenge {
                     writer.newLine();
                 }
             }
+            //end of input check
             Optional<String> optionalOutput = process(null);
+
             if (optionalOutput.isPresent()) {
                 String outputData = optionalOutput.get();
                 writer.write(outputData);

@@ -11,10 +11,11 @@
 # Installation and Setup
 This is a java project so make sure you have Java 8 and Maven installed/configured on your machine.
 Run BeatApplication file either through IDE or through terminal::
-1. Move to the directory where BeatApplication.java resides then on terminal
-2. javac BeatApplication.java
-3. java BeatApplication
-4. Once the execution is sucessful then you should see output in the "output.txt" file under resources folder of the project
+1. Build jar using command "mvn clean install"
+2. Once jar is built run from terminal using below command
+3. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
+4. Once the execution is sucessful then you should see output in the "output.csv" file under resources folder of the project
+
 
 # Limitations
 1. This program runs using only single thread

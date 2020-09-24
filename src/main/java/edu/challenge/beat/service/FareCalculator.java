@@ -7,8 +7,19 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.List;
 
+/**
+ * Class calculates fair for each ride cosidering its speed,
+ * time taken for the complete ride
+ */
 public class FareCalculator {
+
     private static final int SecondToHourly = 3600;
+
+    /**
+     * Method for calculating fair for each ride
+     * @param ride
+     * @return
+     */
     public double calculate(Ride ride) {
         List<Position> positions = ride.getPositions();
         if (positions.isEmpty()) {
