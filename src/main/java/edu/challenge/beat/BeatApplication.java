@@ -1,7 +1,9 @@
 package edu.challenge.beat;
 
 import edu.challenge.beat.model.Position;
+import edu.challenge.beat.model.Ride;
 import edu.challenge.beat.service.Converter;
+import edu.challenge.beat.service.FareCalculator;
 import edu.challenge.beat.service.PositionAggregator;
 
 import java.io.BufferedWriter;
@@ -19,6 +21,7 @@ public class BeatApplication {
 
     private static final Converter converter = new Converter();
     private static final PositionAggregator aggregator = new PositionAggregator();
+    private static final FareCalculator fareCalculator = new FareCalculator();
 
     public static void main(String[] args) throws IOException {
         Path input = Paths.get("src/main/resources/paths.csv");
@@ -45,7 +48,14 @@ public class BeatApplication {
 
     private static Optional<String> process(Position position) {
         return aggregator.aggregate(position)
+                .map(BeatApplication::calculateFare)
                 .map(converter::convert);
+    }
+
+    private static Ride calculateFare(Ride ride) {
+        double fare = fareCalculator.calculate(ride);
+        ride.setFare(fare);
+        return ride;
     }
 
 }
