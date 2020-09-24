@@ -1,5 +1,6 @@
 package edu.challenge.beat;
 
+import edu.challenge.beat.service.BeatChallenge;
 import edu.challenge.beat.service.Converter;
 import edu.challenge.beat.service.FareCalculator;
 import edu.challenge.beat.service.PositionAggregator;

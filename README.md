@@ -6,6 +6,7 @@
 3. Entries are positive
 4. No null / partial tuple
 5. Sample data file name does not change and its name is always inside the resources folder of the project.
+6. Ride fair is calculated at the end of the ride only, there is no intermediate stage
 
 # Installation and Setup
 This is a java project so make sure you have Java 8 and Maven installed/configured on your machine.

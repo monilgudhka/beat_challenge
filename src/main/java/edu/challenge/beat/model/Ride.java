@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Ride {
 
-    private final int id;
+    private final long id;
     private final List<Position> positions = new ArrayList<>();
     private double fare;
 

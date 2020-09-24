@@ -2,17 +2,19 @@ package edu.challenge.beat.service;
 
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
-
+import edu.challenge.beat.util.AppConstants;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.List;
 
 public class FareCalculator {
-
+    private static final int SecondToHourly = 3600;
     public double calculate(Ride ride) {
         List<Position> positions = ride.getPositions();
         if (positions.isEmpty()) {
             return -1;
         }
-        double totalFare = 1.30;
+        double totalFare = AppConstants.InitialFair;
         double idleTime = 0;
         Position source = positions.get(0);
         for (int index = 1; index < positions.size(); index++) {
@@ -22,23 +24,25 @@ public class FareCalculator {
             double time = calcTimeInHours(source, destination);
             double speed = calcSpeed(distance, time);
 
-            if (speed < 10) {
+            if (speed < AppConstants.MinSpeed) {
                 idleTime += time;
                 source = destination;
-            } else if (speed <= 100) {
+            } else if (speed <= AppConstants.MaxSpeed) {
                 double fare = calcFare(distance, source.getTimestamp());
                 totalFare += fare;
                 source = destination;
             }
         }
 
-        totalFare += ((int) idleTime * 11.90);
-        return Math.max(totalFare, 3.47);
+        totalFare += ((int) idleTime * AppConstants.IdleTimePerHourlyFair);
+        return Math.max(totalFare, AppConstants.MinRideFair);
     }
 
     private double calcFare(double distance, long timestamp) {
-        int hour = (int) (timestamp) % 24;
-        return (0 <= hour && hour <= 5) ? 1.3 * distance : 0.74 * distance;
+        int hour = Instant.ofEpochSecond(timestamp)
+                .atOffset(ZoneOffset.UTC)
+                .toLocalTime().getHour();
+        return (AppConstants.RideEndHour <= hour && hour <= AppConstants.RideStartHour) ? AppConstants.NightTimePerKmFair * distance : AppConstants.DayTimePerKmFair * distance;
     }
 
     private double calcSpeed(double distance, double time) {
@@ -50,8 +54,7 @@ public class FareCalculator {
         long endTime = destination.getTimestamp();
 
         long difference = endTime - startTime;
-        // TODO: verify divisible by 3600
-        return (double) difference / 3600;
+        return (double) difference / SecondToHourly;
     }
 
     private double calcDistance(Position source, Position destination) {

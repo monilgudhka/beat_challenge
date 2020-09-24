@@ -1,12 +1,7 @@
-package edu.challenge.beat;
+package edu.challenge.beat.service;
 
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
-import edu.challenge.beat.service.Converter;
-import edu.challenge.beat.service.FareCalculator;
-import edu.challenge.beat.service.PositionAggregator;
-import lombok.RequiredArgsConstructor;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,6 +11,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class BeatChallenge {
@@ -32,6 +28,7 @@ public class BeatChallenge {
             Position position = converter.convert(record);
             process(position).ifPresent(outputData::add);
         }
+        //end of file operation
         process(null).ifPresent(outputData::add);
 
         writeData(output, outputData);

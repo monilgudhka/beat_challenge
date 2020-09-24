@@ -1,6 +1,6 @@
 package edu.challenge.beat.service;
 
-public class HaversineDistance {
+public final class HaversineDistance {
 
     private static final int R = 6371; // Radius of the earth
 
@@ -17,8 +17,4 @@ public class HaversineDistance {
     private static double toRad(Double value) {
         return value * Math.PI / 180;
     }
-
-    private HaversineDistance() {
-    }
-
 }
