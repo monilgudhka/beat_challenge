@@ -2,14 +2,15 @@ package edu.challenge.beat.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Position {
 
-    private int rideId;
-    private double latitude;
-    private double longitude;
-    private long timestamp;
+    private final int rideId;
+    private final double latitude;
+    private final double longitude;
+    private final long timestamp;
 
 }
