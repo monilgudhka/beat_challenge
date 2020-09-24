@@ -14,22 +14,24 @@ Run BeatApplication file either through IDE or through terminal::
 1. Build jar using command "mvn clean install"
 2. Once jar is built run from terminal using below command
 3. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
-4. Once the execution is sucessful then you should see output in the "output.csv" file under resources folder of the project
+4. Once the execution is successful then you should see output in the "output.csv" file under resources folder of the project
 
 
 # Limitations
-1. This program runs using only single thread
+1. This program runs using only a single thread
 2. All the values are bounded by the programming language constraints
 3.
 
 # Features Needed
-1. More parallelization so as to speed up the processing time
-2. With more money and more resources we could achieve this using a map-reduce fuctionality
+1. More parallelization to speed up the processing time
+2. With more money and more resources we could achieve this using a map-reduce functionality
 
 
 # Design Approach
-1. Scan 2 tuples serially
-2. Filter the tuple if calculated speed > 100 km/hr
-3. Calculate current fair
-4. Store the results
-5. Repeat step 1
+1. Scan tuples serially
+2. Wait for next to Ride to start
+3. Calculate distance, time and speed of each Segment in a Ride
+4. Filter the tuple if calculated speed > 100 km/hr
+5. Calculate current fare
+6. Store the results
+7. Repeat step 1
