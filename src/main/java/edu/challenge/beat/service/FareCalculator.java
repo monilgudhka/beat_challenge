@@ -8,7 +8,7 @@ import java.time.ZoneOffset;
 import java.util.List;
 
 /**
- * Class calculates fair for each ride cosidering its speed,
+ * Class calculates fare for each ride cosidering its speed,
  * time taken for the complete ride
  */
 public class FareCalculator {
@@ -16,7 +16,7 @@ public class FareCalculator {
     private static final int SecondToHourly = 3600;
 
     /**
-     * Method for calculating fair for each ride
+     * Method for calculating fare for each ride
      * @param ride
      * @return
      */
@@ -25,7 +25,7 @@ public class FareCalculator {
         if (positions.isEmpty()) {
             return -1;
         }
-        double totalFare = AppConstants.InitialFair;
+        double totalFare = AppConstants.InitialFare;
         double idleTime = 0;
         Position source = positions.get(0);
         for (int index = 1; index < positions.size(); index++) {
@@ -45,15 +45,15 @@ public class FareCalculator {
             }
         }
 
-        totalFare += ((int) idleTime * AppConstants.IdleTimePerHourlyFair);
-        return Math.max(totalFare, AppConstants.MinRideFair);
+        totalFare += ((int) idleTime * AppConstants.IdleTimePerHourlyFare);
+        return Math.max(totalFare, AppConstants.MinRideFare);
     }
 
     private double calcFare(double distance, long timestamp) {
         int hour = Instant.ofEpochSecond(timestamp)
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
-        return (AppConstants.RideEndHour <= hour && hour <= AppConstants.RideStartHour) ? AppConstants.NightTimePerKmFair * distance : AppConstants.DayTimePerKmFair * distance;
+        return (AppConstants.RideEndHour <= hour && hour <= AppConstants.RideStartHour) ? AppConstants.NightTimePerKmFare * distance : AppConstants.DayTimePerKmFare * distance;
     }
 
     private double calcSpeed(double distance, double time) {

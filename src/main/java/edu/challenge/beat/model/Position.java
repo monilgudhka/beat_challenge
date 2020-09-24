@@ -3,6 +3,9 @@ package edu.challenge.beat.model;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Position model class with rideid, latitude, longitude and timestamp for each tuple
+ */
 @Data
 @RequiredArgsConstructor
 public class Position {

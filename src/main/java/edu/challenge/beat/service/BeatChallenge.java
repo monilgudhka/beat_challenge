@@ -12,6 +12,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 
+/**
+ * BeatChallenge class reading the input file and write the required output data
+ * into the output.csv file
+ */
 @RequiredArgsConstructor
 public class BeatChallenge {
 

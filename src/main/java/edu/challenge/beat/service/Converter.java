@@ -3,8 +3,16 @@ package edu.challenge.beat.service;
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 
+/**
+ * Converter class converting the string tuple data into objects
+ */
 public class Converter {
 
+    /**
+     * Method to convert string tuple data into Position object
+     * @param record
+     * @return
+     */
     public Position convert(String record) {
         String[] data = record.split(",");
         int rideId = Integer.parseInt(data[0]);
@@ -14,6 +22,11 @@ public class Converter {
         return new Position(rideId, latitude, longitude, timestamp);
     }
 
+    /**
+     * Method to return the output in required format
+     * @param ride
+     * @return
+     */
     public String convert(Ride ride) {
         return ride.getId() + "," + ride.getFare();
     }

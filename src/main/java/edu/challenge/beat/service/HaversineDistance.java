@@ -1,5 +1,8 @@
 package edu.challenge.beat.service;
 
+/**
+ * Class performing https://en.wikipedia.org/wiki/Haversine_formula
+ */
 public final class HaversineDistance {
 
     private static final int R = 6371; // Radius of the earth

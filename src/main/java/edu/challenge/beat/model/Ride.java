@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Ride model class with id, position and fare
+ */
 @Data
 @RequiredArgsConstructor
 public class Ride {
