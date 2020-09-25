@@ -35,3 +35,13 @@ Run BeatApplication file either through IDE or through terminal::
 5. Calculate current fare
 6. Store the results
 7. Repeat step 1
+
+
+# Todo
+1. Remove if else and use design pattern as future requirements can change
+2. Specify file path in properties file
+3. Make this multithreaded
+    3.1 either 1 reader thread and multiple consumer threads
+    3.2 lmax disruptor
+4. Update variables names and add proper comments
+5. Add unit tests
