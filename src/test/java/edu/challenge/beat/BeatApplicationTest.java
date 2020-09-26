@@ -2,50 +2,37 @@ package edu.challenge.beat;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Properties;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BeatApplicationTest {
 
-    @Test
-    void mainThrowsNullPointerExceptionTest_01 ( ) {
-        assertThrows( NullPointerException.class, () -> {
-            Properties properties = new Properties();
-            String appConfigPath = "app.properties";
-            InputStream inputStream = Thread.currentThread ().getContextClassLoader ().getResourceAsStream ( appConfigPath );
-            properties.load(inputStream);
-        });
+    private final Path output = Paths.get("src/test/resources/outputFile.csv");
+
+    @AfterEach
+    void deleteOutput( ) throws IOException {
+        Files.deleteIfExists(output);
     }
 
     @Test
-    void mainThrowsNullPointerExceptionTest_02 ( ) {
-        assertThrows( NullPointerException.class, () -> {
-            Properties properties = new Properties();
-            Path inputFile = Paths.get(properties.getProperty ( "inputFilePath" ));
-        });
+    void mainThrowsNullPointerExceptionTest_01 ( ) throws IOException {
+
+        BeatApplication.main(null);
+
+        List<String> data = Files.readAllLines(output);
+        assertEquals( 1, data.size() );
+        assertEquals ( "1,10.3", data.get(0) );
     }
 
-    @Test
-    void mainThrowsIOExceptionTest_03 ( ) {
-        assertThrows( NullPointerException.class, () -> {
-            Properties properties = new Properties();
-            String appConfigPath = "config.properties";
-            InputStream inputStream = Thread.currentThread ().getContextClassLoader ().getResourceAsStream ( appConfigPath );
-            properties.load(inputStream);
-
-            //read the file paths
-            Path inputFile = Paths.get(properties.getProperty ( "invalidFilePath" ));
-        });
-    }
-
-    @Test
-    @Disabled
-    void mainMethodPropertiesFileLoadingTest_03 ( ) throws IOException {
-
-    }
 }
