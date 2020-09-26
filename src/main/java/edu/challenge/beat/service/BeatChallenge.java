@@ -13,7 +13,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 
 /**
- * Class reading the input file and write the required output data
+ * Class reading the input file, send data for processing and write the required output data
  * into the output.csv file
  */
 @RequiredArgsConstructor
@@ -24,7 +24,7 @@ public class BeatChallenge {
     private final FareCalculator fareCalculator;
 
     /**
-     * Method for reading the input file and writing the result to the output file
+     * Method for reading the input file, send data for processing and writing the result to the output file
      * @param inputFilePath
      * @param outputFilePath
      * @throws IOException
@@ -32,7 +32,7 @@ public class BeatChallenge {
     public void run(Path inputFilePath, Path outputFilePath) throws IOException {
         try (
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
-                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE);
+                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
         ) {
 
             String record;
