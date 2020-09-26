@@ -34,10 +34,10 @@ class BeatChallengeTest {
         Files.deleteIfExists(input);
     }
 
-//    @AfterEach
-//    void deleteOutputFile() throws IOException {
-//        Files.deleteIfExists(output);
-//    }
+    @AfterEach
+    void deleteOutputFile() throws IOException {
+        Files.deleteIfExists(output);
+    }
 
     @Test
     void runMethodShouldProcessTest_01() throws IOException {
