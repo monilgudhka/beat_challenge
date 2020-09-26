@@ -7,8 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PositionAggregatorTest {
 
@@ -36,10 +35,24 @@ class PositionAggregatorTest {
     }
 
     @Test
-    @Disabled
     void aggregatePositionRideNotNullTest_03 ( ){
-        Ride ride = new Ride(1);
-        ride.setFare ( 3.47 );
-        assertEquals ( Optional.of ( ride ) , positionAggregator.aggregate ( position ) );
+        Position positionOfRide2 = new Position(2,
+                37.966195,
+                23.728613,
+                1405595001);
+        assertEquals ( Optional.empty() , positionAggregator.aggregate ( position ) );
+        Optional<Ride> aggregate = positionAggregator.aggregate(positionOfRide2);
+        assertTrue(aggregate.isPresent());
+        Ride ride = aggregate.get();
+        assertEquals(1, ride.getId());
+        assertEquals(1, ride.getPositions().size());
+        assertEquals(position, ride.getPositions().get(0));
+
+        aggregate = positionAggregator.aggregate(null);
+        assertTrue(aggregate.isPresent());
+        ride = aggregate.get();
+        assertEquals(2, ride.getId());
+        assertEquals(1, ride.getPositions().size());
+        assertEquals(positionOfRide2, ride.getPositions().get(0));
     }
 }
