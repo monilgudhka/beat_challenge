@@ -1,4 +1,4 @@
-package edu.challenge.beat.service;
+package edu.challenge.beat.util;
 
 /**
  * Class calculating https://en.wikipedia.org/wiki/Haversine_formula

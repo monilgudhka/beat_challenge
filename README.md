@@ -4,9 +4,10 @@
 1. There are always at least 2 tuples per id.
 2. Data is always sorted
 3. Entries are positive
-4. No null / partial tuple
+4. No partial tuple
 5. Sample data file name does not change and its name is always inside the resources folder of the project.
 6. Ride fair is calculated at the end of the ride only, there is no intermediate stage
+7. Input file records are comma separated
 
 # Installation and Setup
 This is a java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
@@ -48,3 +49,6 @@ Run BeatApplication file through through terminal::
 5. Add unit tests
 6. Add proper comment on class BeatChallenge's run and process methods
 7. Write detailed approach
+8. What if any tuple is empty?
+9. Verify convert unit tests
+10. Correct PositionAggregatorTest disabled unit tests

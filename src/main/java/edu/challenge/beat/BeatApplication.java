@@ -15,8 +15,8 @@ import java.nio.file.Paths;
 public class BeatApplication {
 
     public static void main(String[] args) throws IOException {
-        Path input = Paths.get("src/main/resources/paths.csv");
-        Path output = Paths.get("src/main/resources/output.csv");
+        Path inputFile = Paths.get("src/main/resources/paths.csv");
+        Path outputFile = Paths.get("src/main/resources/output.csv");
         //System.out.println("start time= "+System.currentTimeMillis ());
         long st = System.currentTimeMillis ();
 
@@ -25,7 +25,7 @@ public class BeatApplication {
         FareCalculator fareCalculator = new FareCalculator();
 
         BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);
-        challenge.run(input, output);
+        challenge.run(inputFile, outputFile);
 
         //System.out.println("end time= "+System.currentTimeMillis ());
         long et = System.currentTimeMillis ();

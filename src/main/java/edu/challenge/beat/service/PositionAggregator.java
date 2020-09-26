@@ -2,7 +2,7 @@ package edu.challenge.beat.service;
 
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
-
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -17,12 +17,12 @@ public class PositionAggregator {
      * @return
      */
     public Optional<Ride> aggregate(Position position) {
-        if (position == null) {
+        if (Objects.isNull ( position )) {
             Ride currentRide = ride;
             ride = null;
             return Optional.of(currentRide);
         }
-        if (ride == null) {
+        if (Objects.isNull ( ride )) {
             ride = new Ride(position.getRideId());
         }
         if (ride.getId() == position.getRideId()) {

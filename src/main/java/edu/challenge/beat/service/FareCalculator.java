@@ -3,6 +3,7 @@ package edu.challenge.beat.service;
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 import edu.challenge.beat.util.AppConstants;
+import edu.challenge.beat.util.HaversineDistance;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.List;
