@@ -13,18 +13,18 @@
 - This is a java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
 - Input and output file path can be mentined in the 'config.properties' file
 
-Run BeatApplication through through terminal::
-0. Move to the directory where pom.xml is there
-1. Build jar using command "mvn clean install"
-2. Once jar is built run from the terminal using below command
-3. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
-4. Once the execution is successful then you should see output in the "output.csv" file under resources folder of the project
+- Run BeatApplication through through terminal::
+1. Move to the directory where pom.xml is there
+2. Build jar using command "mvn clean install"
+3. Once jar is built run from the terminal using below command
+4. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
+5. Once the execution is successful then you should see output in the "output.csv" file under resources folder of the project
 
 
-Run BeatApplication file through through IntelliJIDEA::
-0. Install lombok plugin
-1. Setup project jdk to 1.8
-2. Run BeatApplication.java file
+- Run BeatApplication file through through IntelliJIDEA::
+1. Install lombok plugin
+2. Setup project jdk to 1.8
+3. Run BeatApplication.java file
 
 
 # Limitations
