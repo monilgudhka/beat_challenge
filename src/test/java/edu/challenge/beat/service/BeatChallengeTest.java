@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BeatChallengeTest {
 
-    final BeatChallenge beatChallenge = new BeatChallenge (  new Converter (), new PositionAggregator (), new FareCalculator ());
-
     @Test
     void runMethodShouldThrowIOExceptionTest_01 ( ) {
         assertThrows( IOException.class, () -> {
