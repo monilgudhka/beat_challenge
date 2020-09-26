@@ -38,6 +38,4 @@ class BeatChallengeTest {
         beatChallenge.run ( inputFilePath,outputFilePath );
         assertEquals ( reader.readLine ( ), "1,10.3" );
     }
-
-
 }

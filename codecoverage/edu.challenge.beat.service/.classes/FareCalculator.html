@@ -61,7 +61,7 @@
     100%
   </span>
   <span class="absValue">
-    (44/ 44)
+    (32/ 32)
   </span>
 </td>
 </tr>
@@ -86,7 +86,7 @@
 <i>12</i>&nbsp;/**
 <i>13</i>&nbsp; * Class calculating fare for each ride considering its speed,
 <i>14</i>&nbsp; * time taken for the ride
-<b class="fc"><i>15</i>&nbsp; */</b>
+<i>15</i>&nbsp; */
 <b class="fc"><i>16</i>&nbsp;public class FareCalculator {</b>
 <i>17</i>&nbsp;
 <i>18</i>&nbsp;    private static final int SecondToHourly = 3600;
@@ -96,22 +96,22 @@
 <i>22</i>&nbsp;     * Method for calculating fare for each ride
 <i>23</i>&nbsp;     * @param ride
 <i>24</i>&nbsp;     * @return
-<b class="fc"><i>25</i>&nbsp;     */</b>
-<b class="fc"><i>26</i>&nbsp;    public double calculate(Ride ride) {</b>
+<i>25</i>&nbsp;     */
+<i>26</i>&nbsp;    public double calculate(Ride ride) {
 <b class="fc"><i>27</i>&nbsp;        List&lt;Position&gt; positions = ride.getPositions();</b>
 <b class="fc"><i>28</i>&nbsp;        if (positions.isEmpty()) {</b>
 <b class="fc"><i>29</i>&nbsp;            return -1;</b>
-<b class="fc"><i>30</i>&nbsp;        }</b>
+<i>30</i>&nbsp;        }
 <b class="fc"><i>31</i>&nbsp;        double totalFare = AppConstants.INITIAL_FARE;</b>
 <b class="fc"><i>32</i>&nbsp;        double idleTime = 0;</b>
 <b class="fc"><i>33</i>&nbsp;        Position source = positions.get(0);</b>
 <b class="fc"><i>34</i>&nbsp;        for (int index = 1; index &lt; positions.size(); index++) {</b>
 <b class="fc"><i>35</i>&nbsp;            Position destination = positions.get(index);</b>
-<b class="fc"><i>36</i>&nbsp;</b>
+<i>36</i>&nbsp;
 <b class="fc"><i>37</i>&nbsp;            double distance = calcDistance(source, destination);</b>
 <b class="fc"><i>38</i>&nbsp;            double time = calcTimeInHours(source, destination);</b>
 <b class="fc"><i>39</i>&nbsp;            double speed = calcSpeed(distance, time);</b>
-<b class="fc"><i>40</i>&nbsp;</b>
+<i>40</i>&nbsp;
 <b class="fc"><i>41</i>&nbsp;            if (speed &lt; AppConstants.MIN_SPEED ) {</b>
 <b class="fc"><i>42</i>&nbsp;                idleTime += time;</b>
 <b class="fc"><i>43</i>&nbsp;                source = destination;</b>
@@ -120,7 +120,7 @@
 <b class="fc"><i>46</i>&nbsp;                totalFare += fare;</b>
 <b class="fc"><i>47</i>&nbsp;                source = destination;</b>
 <i>48</i>&nbsp;            }
-<b class="fc"><i>49</i>&nbsp;        }</b>
+<i>49</i>&nbsp;        }
 <b class="fc"><i>50</i>&nbsp;        totalFare += ((int) idleTime * AppConstants.IDLE_TIME_PER_HOURLY_FARE);</b>
 <b class="fc"><i>51</i>&nbsp;        return Double.parseDouble ( decimalFormat.format ( Math.max(totalFare, AppConstants.MIN_RIDE_FARE ) ));</b>
 <i>52</i>&nbsp;    }
@@ -131,7 +131,7 @@
 <i>57</i>&nbsp;     * @param timestamp
 <i>58</i>&nbsp;     * @return
 <i>59</i>&nbsp;     */
-<b class="fc"><i>60</i>&nbsp;    private double calcFare(double distance, long timestamp) {</b>
+<i>60</i>&nbsp;    private double calcFare(double distance, long timestamp) {
 <b class="fc"><i>61</i>&nbsp;        int hour = Instant.ofEpochSecond(timestamp)</b>
 <b class="fc"><i>62</i>&nbsp;                .atOffset(ZoneOffset.UTC)</b>
 <b class="fc"><i>63</i>&nbsp;                .toLocalTime().getHour();</b>
@@ -144,7 +144,7 @@
 <i>70</i>&nbsp;     * Helper Method for speed calculation
 <i>71</i>&nbsp;     * @param distance
 <i>72</i>&nbsp;     * @param time
-<b class="fc"><i>73</i>&nbsp;     * @return</b>
+<i>73</i>&nbsp;     * @return
 <i>74</i>&nbsp;     */
 <i>75</i>&nbsp;    private double calcSpeed(double distance, double time) {
 <b class="fc"><i>76</i>&nbsp;        return distance / time;</b>
@@ -154,8 +154,8 @@
 <i>80</i>&nbsp;     * Helper Method for time in hours calculation
 <i>81</i>&nbsp;     * @param source
 <i>82</i>&nbsp;     * @param destination
-<b class="fc"><i>83</i>&nbsp;     * @return</b>
-<b class="fc"><i>84</i>&nbsp;     */</b>
+<i>83</i>&nbsp;     * @return
+<i>84</i>&nbsp;     */
 <i>85</i>&nbsp;    private double calcTimeInHours(Position source, Position destination) {
 <b class="fc"><i>86</i>&nbsp;        long startTime = source.getTimestamp();</b>
 <b class="fc"><i>87</i>&nbsp;        long endTime = destination.getTimestamp();</b>
@@ -168,7 +168,7 @@
 <i>94</i>&nbsp;     * Helper Method for distance calculation
 <i>95</i>&nbsp;     * @param source
 <i>96</i>&nbsp;     * @param destination
-<b class="fc"><i>97</i>&nbsp;     * @return</b>
+<i>97</i>&nbsp;     * @return
 <i>98</i>&nbsp;     */
 <i>99</i>&nbsp;    private double calcDistance(Position source, Position destination) {
 <b class="fc"><i>100</i>&nbsp;        return HaversineDistance.getDistance(source.getLatitude(), source.getLongitude(), destination.getLatitude(), destination.getLongitude());</b>
@@ -180,7 +180,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-26 22:20</div>
+    <div style="float:right;">generated on 2020-09-26 22:30</div>
 </div>
 </body>
 </html>
