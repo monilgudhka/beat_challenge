@@ -22,7 +22,7 @@
 
 
 - Run BeatApplication file through through IntelliJIDEA::
-1. Install lombok plugin
+1. Install : Maven Helper,Sonarlint,Lombok plugins
 2. Setup project jdk to 1.8
 3. Run BeatApplication.java file
 
@@ -70,3 +70,7 @@
 - Results:
  1) Input file size 1.34GB
  2) Time taken 30 seconds
+
+# CodeCoverage Report
+- CodeCoverage report can be found under CodeCoverage folder
+- Current results :: 77%

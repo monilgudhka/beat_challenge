@@ -4,6 +4,7 @@ import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 import edu.challenge.beat.util.AppConstants;
 import edu.challenge.beat.util.HaversineDistance;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class FareCalculator {
 
     private static final int SecondToHourly = 3600;
+    private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     /**
      * Method for calculating fare for each ride
@@ -45,9 +47,8 @@ public class FareCalculator {
                 source = destination;
             }
         }
-
         totalFare += ((int) idleTime * AppConstants.IDLE_TIME_PER_HOURLY_FARE);
-        return Math.max(totalFare, AppConstants.MIN_RIDE_FARE );
+        return Double.parseDouble ( decimalFormat.format ( Math.max(totalFare, AppConstants.MIN_RIDE_FARE ) ));
     }
 
     /**
@@ -60,7 +61,9 @@ public class FareCalculator {
         int hour = Instant.ofEpochSecond(timestamp)
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
-        return (AppConstants.RIDE_END_HOUR <= hour && hour <= AppConstants.RIDE_START_HOUR) ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance : AppConstants.DAY_TIME_PER_KM_FARE * distance;
+        return (AppConstants.RIDE_END_HOUR <= hour && hour <= AppConstants.RIDE_START_HOUR)
+                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance : AppConstants.DAY_TIME_PER_KM_FARE
+                * distance;
     }
 
     /**

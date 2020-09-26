@@ -46,7 +46,7 @@ class FareCalculatorTest {
         Ride ride = Mockito.mock ( Ride.class );
         when(ride.getPositions ()).thenReturn(positionList);
 
-        assertEquals(8.42844269953419,fareCalculator.calculate ( ride ));
+        assertEquals(8.43,fareCalculator.calculate ( ride ));
     }
 
     @Test
@@ -64,6 +64,6 @@ class FareCalculatorTest {
         Ride ride = Mockito.mock ( Ride.class );
         when(ride.getPositions ()).thenReturn(positionList);
 
-        assertEquals(8.42844269953419,fareCalculator.calculate ( ride ));
+        assertEquals(8.43,fareCalculator.calculate ( ride ));
     }
 }
