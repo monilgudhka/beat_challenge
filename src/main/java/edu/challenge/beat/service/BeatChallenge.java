@@ -24,7 +24,6 @@ public class BeatChallenge {
     private final FareCalculator fareCalculator;
 
     /**
-     * Method for reading the input file, send data for processing and writing the result to the output file
      * @param inputFilePath
      * @param outputFilePath
      * @throws IOException
@@ -37,26 +36,31 @@ public class BeatChallenge {
 
             String record;
             while ((record = reader.readLine()) != null) {
-                if (record.isEmpty ()){
+                //ignore empty records
+                if (record.trim().isEmpty ()){
                     continue;
                 }
                 //convert record into an object
                 Position position = converter.convert(record);
-                Optional<String> optionalOutput = process(position);
-                if (optionalOutput.isPresent()) {
-                    String outputData = optionalOutput.get();
-                    writer.write(outputData);
-                    writer.newLine();
-                }
+                processAndWriteRecord ( writer , position );
             }
-            //end of input check
-            Optional<String> optionalOutput = process(null);
+            //end of input check, that means last ride has been processed
+            processAndWriteRecord ( writer , null );
+        }
+    }
 
-            if (optionalOutput.isPresent()) {
-                String outputData = optionalOutput.get();
-                writer.write(outputData);
-                writer.newLine();
-            }
+    /**
+     * Helper method for writing the processed data into the output file
+     * @param writer
+     * @param position
+     * @throws IOException
+     */
+    private void processAndWriteRecord ( BufferedWriter writer , Position position ) throws IOException {
+        Optional < String > optionalOutput = process ( position );
+        if ( optionalOutput.isPresent ( ) ) {
+            String outputData = optionalOutput.get ( );
+            writer.write ( outputData );
+            writer.newLine ( );
         }
     }
 
@@ -67,8 +71,8 @@ public class BeatChallenge {
      */
     private Optional<String> process(Position position) {
         return aggregator.aggregate(position)
-                .map(this::calculateFare)
-                .map(converter::convert);
+                .map(this::calculateFare) //once all the records of a ride are read then proceed with fare calculation
+                .map(converter::convert); //ride object to string conversion to write into the output file
     }
 
     /**

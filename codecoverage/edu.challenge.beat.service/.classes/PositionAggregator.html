@@ -55,16 +55,28 @@
 </td>
 </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$78209462</td>
+    <td class="name">PositionAggregator$MockitoMock$1267223888</td>
   </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$78209462$auxiliary$2WtuMZd3</td>
+    <td class="name">PositionAggregator$MockitoMock$1267223888$auxiliary$BJ166SXu</td>
   </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$78209462$auxiliary$AsIl1wfN</td>
+    <td class="name">PositionAggregator$MockitoMock$1267223888$auxiliary$eDfrsChi</td>
   </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$78209462$auxiliary$c0TpQskW</td>
+    <td class="name">PositionAggregator$MockitoMock$1267223888$auxiliary$O62PFLLW</td>
+  </tr>
+  <tr>
+    <td class="name">PositionAggregator$MockitoMock$1439928734</td>
+  </tr>
+  <tr>
+    <td class="name">PositionAggregator$MockitoMock$1439928734$auxiliary$CcgMVkLI</td>
+  </tr>
+  <tr>
+    <td class="name">PositionAggregator$MockitoMock$1439928734$auxiliary$m3DpREIe</td>
+  </tr>
+  <tr>
+    <td class="name">PositionAggregator$MockitoMock$1439928734$auxiliary$VEzACdDY</td>
   </tr>
 <tr>
   <td class="name"><strong>total</strong></td>
@@ -106,36 +118,42 @@
 <i>13</i>&nbsp;    private Ride ride;
 <i>14</i>&nbsp;
 <i>15</i>&nbsp;    /**
-<i>16</i>&nbsp;     * @param position
-<i>17</i>&nbsp;     * @return
-<i>18</i>&nbsp;     */
-<i>19</i>&nbsp;    public Optional&lt;Ride&gt; aggregate(Position position) {
-<b class="fc"><i>20</i>&nbsp;        if (Objects.isNull ( position )) {</b>
-<b class="fc"><i>21</i>&nbsp;            Ride currentRide = ride;</b>
-<b class="fc"><i>22</i>&nbsp;            ride = null;</b>
-<b class="fc"><i>23</i>&nbsp;            return Optional.of(currentRide);</b>
-<i>24</i>&nbsp;        }
-<b class="fc"><i>25</i>&nbsp;        if (Objects.isNull ( ride )) {</b>
-<b class="fc"><i>26</i>&nbsp;            ride = new Ride(position.getRideId());</b>
-<i>27</i>&nbsp;        }
-<b class="fc"><i>28</i>&nbsp;        if (ride.getId() == position.getRideId()) {</b>
-<b class="fc"><i>29</i>&nbsp;            ride.getPositions().add(position);</b>
-<b class="fc"><i>30</i>&nbsp;            return Optional.empty();</b>
-<i>31</i>&nbsp;        } else {
-<b class="fc"><i>32</i>&nbsp;            Ride newRide = ride;</b>
-<b class="fc"><i>33</i>&nbsp;            ride = new Ride(position.getRideId());</b>
-<b class="fc"><i>34</i>&nbsp;            ride.getPositions().add(position);</b>
-<b class="fc"><i>35</i>&nbsp;            return Optional.of(newRide);</b>
-<i>36</i>&nbsp;        }
-<i>37</i>&nbsp;    }
-<i>38</i>&nbsp;
-<i>39</i>&nbsp;}
+<i>16</i>&nbsp;     * Method for creating Ride and List of Positions of the ride
+<i>17</i>&nbsp;     * @param position
+<i>18</i>&nbsp;     * @return
+<i>19</i>&nbsp;     */
+<i>20</i>&nbsp;    public Optional&lt;Ride&gt; aggregate(Position position) {
+<i>21</i>&nbsp;        //end of input, last ride processed
+<b class="fc"><i>22</i>&nbsp;        if (Objects.isNull ( position )) {</b>
+<b class="fc"><i>23</i>&nbsp;            Ride currentRide = ride;</b>
+<b class="fc"><i>24</i>&nbsp;            ride = null;</b>
+<b class="fc"><i>25</i>&nbsp;            return Optional.of(currentRide);</b>
+<i>26</i>&nbsp;        }
+<i>27</i>&nbsp;        //first ride
+<b class="fc"><i>28</i>&nbsp;        if (Objects.isNull ( ride )) {</b>
+<b class="fc"><i>29</i>&nbsp;            ride = new Ride(position.getRideId());</b>
+<i>30</i>&nbsp;        }
+<i>31</i>&nbsp;        //ride is still not done
+<b class="fc"><i>32</i>&nbsp;        if (ride.getId() == position.getRideId()) {</b>
+<b class="fc"><i>33</i>&nbsp;            ride.getPositions().add(position);</b>
+<i>34</i>&nbsp;            //as ride has not completed so returning empty optional
+<b class="fc"><i>35</i>&nbsp;            return Optional.empty();</b>
+<i>36</i>&nbsp;        } else {
+<b class="fc"><i>37</i>&nbsp;            Ride newRide = ride;</b>
+<b class="fc"><i>38</i>&nbsp;            ride = new Ride(position.getRideId());</b>
+<b class="fc"><i>39</i>&nbsp;            ride.getPositions().add(position);</b>
+<i>40</i>&nbsp;            //ride completed
+<b class="fc"><i>41</i>&nbsp;            return Optional.of(newRide);</b>
+<i>42</i>&nbsp;        }
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-26 23:28</div>
+    <div style="float:right;">generated on 2020-09-27 00:45</div>
 </div>
 </body>
 </html>

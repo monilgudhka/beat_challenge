@@ -4,10 +4,10 @@ import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PositionAggregatorTest {
 
@@ -20,13 +20,6 @@ class PositionAggregatorTest {
                 37.966195,
                 23.728613,
                 1405595001);
-    }
-
-    @Test
-    @Disabled
-    void aggregatePositionNullTest_01 ( ) {
-        Position position = null;
-        assertNull(positionAggregator.aggregate ( position ));
     }
 
     @Test

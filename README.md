@@ -51,6 +51,7 @@
     3.1 either 1 reader thread and multiple consumer threads
     3.2 Lmax disruptor
 7. Write detailed approach
+8. Manually verify output
 
 
 # Benchmark Results

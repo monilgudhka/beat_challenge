@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,14 +30,14 @@ class BeatChallengeTest {
     private final Path output = Paths.get("src/test/resources/output.csv");
 
     @AfterEach
-    void deleteInput() throws IOException {
+    void deleteInputFile() throws IOException {
         Files.deleteIfExists(input);
     }
 
-    @AfterEach
-    void deleteOutput() throws IOException {
-        Files.deleteIfExists(output);
-    }
+//    @AfterEach
+//    void deleteOutputFile() throws IOException {
+//        Files.deleteIfExists(output);
+//    }
 
     @Test
     void runMethodShouldProcessTest_01() throws IOException {
@@ -61,8 +60,12 @@ class BeatChallengeTest {
     }
 
     @Test
-    @Disabled
-    void runMethodEmptyRecordTest_02(){
+    void runMethodEmptyRecordTest_02() throws IOException {
+        Files.write(input, "position\n   ".getBytes());
 
+        beatChallenge.run(input, output);
+
+        List<String> data = Files.readAllLines(output);
+        assertEquals ( 0,data.size () );
     }
 }
