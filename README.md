@@ -9,10 +9,11 @@
 6. Ride fair is calculated at the end of the ride only, there is no intermediate stage
 
 # Installation and Setup
-This is a java project so make sure you have Java 8 and Maven installed/configured on your machine.
-Run BeatApplication file either through IDE or through terminal::
+This is a java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
+
+Run BeatApplication file through through terminal::
 1. Build jar using command "mvn clean install"
-2. Once jar is built run from terminal using below command
+2. Once jar is built run from the terminal using below command
 3. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
 4. Once the execution is successful then you should see output in the "output.csv" file under resources folder of the project
 
@@ -20,11 +21,11 @@ Run BeatApplication file either through IDE or through terminal::
 # Limitations
 1. This program runs using only a single thread
 2. All the values are bounded by the programming language constraints
-3.
+
 
 # Features Needed
 1. More parallelization to speed up the processing time
-2. With more money and more resources we could achieve this using a map-reduce functionality
+2. *With more money and more resources we could achieve this using a map-reduce functionality
 
 
 # Design Approach
@@ -45,3 +46,5 @@ Run BeatApplication file either through IDE or through terminal::
     3.2 lmax disruptor
 4. Update variables names and add proper comments
 5. Add unit tests
+6. Add proper comment on class BeatChallenge's run and process methods
+7. Write detailed approach

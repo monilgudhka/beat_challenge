@@ -5,15 +5,22 @@ import edu.challenge.beat.model.Ride;
 
 import java.util.Optional;
 
+/**
+ * Class aggregating the individual ride positions
+ */
 public class PositionAggregator {
 
     private Ride ride;
 
+    /**
+     * @param position
+     * @return
+     */
     public Optional<Ride> aggregate(Position position) {
         if (position == null) {
-            Ride tempRide = ride;
+            Ride currentRide = ride;
             ride = null;
-            return Optional.of(tempRide);
+            return Optional.of(currentRide);
         }
         if (ride == null) {
             ride = new Ride(position.getRideId());
@@ -22,10 +29,10 @@ public class PositionAggregator {
             ride.getPositions().add(position);
             return Optional.empty();
         } else {
-            Ride tempRide = ride;
+            Ride newRide = ride;
             ride = new Ride(position.getRideId());
             ride.getPositions().add(position);
-            return Optional.of(tempRide);
+            return Optional.of(newRide);
         }
     }
 

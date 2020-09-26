@@ -4,7 +4,7 @@ import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 
 /**
- * Converter class converting the string tuple data into objects
+ * Class converting the string tuple(from input file) into object
  */
 public class Converter {
 

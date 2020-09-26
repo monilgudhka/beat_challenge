@@ -13,7 +13,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 
 /**
- * BeatChallenge class reading the input file and write the required output data
+ * Class reading the input file and write the required output data
  * into the output.csv file
  */
 @RequiredArgsConstructor
@@ -23,14 +23,21 @@ public class BeatChallenge {
     private final PositionAggregator aggregator;
     private final FareCalculator fareCalculator;
 
-    public void run(Path input, Path output) throws IOException {
+    /**
+     * Method for reading the input file and writing the result to the output file
+     * @param inputFilePath
+     * @param outputFilePath
+     * @throws IOException
+     */
+    public void run(Path inputFilePath, Path outputFilePath) throws IOException {
         try (
-                BufferedReader reader = Files.newBufferedReader(input);
-                BufferedWriter writer = Files.newBufferedWriter(output, StandardOpenOption.CREATE)
+                BufferedReader reader = Files.newBufferedReader(inputFilePath);
+                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
         ) {
 
             String record;
             while ((record = reader.readLine()) != null) {
+                //convert tuple into an object
                 Position position = converter.convert(record);
                 Optional<String> optionalOutput = process(position);
                 if (optionalOutput.isPresent()) {
@@ -50,12 +57,22 @@ public class BeatChallenge {
         }
     }
 
+    /**
+     * Helper Method for aggregating the ride data and calculate fare
+     * @param position
+     * @return
+     */
     private Optional<String> process(Position position) {
         return aggregator.aggregate(position)
                 .map(this::calculateFare)
                 .map(converter::convert);
     }
 
+    /**
+     * Helper Method for calculating the individual ride fare
+     * @param ride
+     * @return
+     */
     private Ride calculateFare(Ride ride) {
         double fare = fareCalculator.calculate(ride);
         ride.setFare(fare);

@@ -8,8 +8,8 @@ import java.time.ZoneOffset;
 import java.util.List;
 
 /**
- * Class calculates fare for each ride cosidering its speed,
- * time taken for the complete ride
+ * Class calculating fare for each ride considering its speed,
+ * time taken for the ride
  */
 public class FareCalculator {
 
@@ -49,6 +49,12 @@ public class FareCalculator {
         return Math.max(totalFare, AppConstants.MinRideFare);
     }
 
+    /**
+     * Helper Method for fare calculation
+     * @param distance
+     * @param timestamp
+     * @return
+     */
     private double calcFare(double distance, long timestamp) {
         int hour = Instant.ofEpochSecond(timestamp)
                 .atOffset(ZoneOffset.UTC)
@@ -56,10 +62,22 @@ public class FareCalculator {
         return (AppConstants.RideEndHour <= hour && hour <= AppConstants.RideStartHour) ? AppConstants.NightTimePerKmFare * distance : AppConstants.DayTimePerKmFare * distance;
     }
 
+    /**
+     * Helper Method for speed calculation
+     * @param distance
+     * @param time
+     * @return
+     */
     private double calcSpeed(double distance, double time) {
         return distance / time;
     }
 
+    /**
+     * Helper Method for time in hours calculation
+     * @param source
+     * @param destination
+     * @return
+     */
     private double calcTimeInHours(Position source, Position destination) {
         long startTime = source.getTimestamp();
         long endTime = destination.getTimestamp();
@@ -68,6 +86,12 @@ public class FareCalculator {
         return (double) difference / SecondToHourly;
     }
 
+    /**
+     * Helper Method for distance calculation
+     * @param source
+     * @param destination
+     * @return
+     */
     private double calcDistance(Position source, Position destination) {
         return HaversineDistance.getDistance(source.getLatitude(), source.getLongitude(), destination.getLatitude(), destination.getLongitude());
     }

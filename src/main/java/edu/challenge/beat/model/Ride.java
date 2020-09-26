@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Ride model class with id, position and fare
+ * Model class with id, positions and fare
  */
 @Data
 @RequiredArgsConstructor

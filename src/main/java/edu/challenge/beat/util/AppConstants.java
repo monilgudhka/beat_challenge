@@ -1,5 +1,8 @@
 package edu.challenge.beat.util;
 
+/**
+ * Class for all the constants
+ */
 public class AppConstants {
     public static final double InitialFare = 1.30D;
     public static final int MinSpeed = 10;

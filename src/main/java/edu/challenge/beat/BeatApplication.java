@@ -19,15 +19,17 @@ public class BeatApplication {
         Path output = Paths.get("src/main/resources/output.csv");
         //System.out.println("start time= "+System.currentTimeMillis ());
         long st = System.currentTimeMillis ();
+
         Converter converter = new Converter();
         PositionAggregator aggregator = new PositionAggregator();
         FareCalculator fareCalculator = new FareCalculator();
 
         BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);
         challenge.run(input, output);
+
         //System.out.println("end time= "+System.currentTimeMillis ());
         long et = System.currentTimeMillis ();
-        System.out.println("Time taken= "+ (et - st));
+        System.out.println("Time taken in milliseconds= "+ (et - st));
     }
 
 }

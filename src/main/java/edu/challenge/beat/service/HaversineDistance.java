@@ -1,7 +1,7 @@
 package edu.challenge.beat.service;
 
 /**
- * Class performing https://en.wikipedia.org/wiki/Haversine_formula
+ * Class calculating https://en.wikipedia.org/wiki/Haversine_formula
  */
 public final class HaversineDistance {
 

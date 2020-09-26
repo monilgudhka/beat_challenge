@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Position model class with rideid, latitude, longitude and timestamp for each tuple
+ * Model class with rideid, latitude, longitude and timestamp for each tuple
  */
 @Data
 @RequiredArgsConstructor
