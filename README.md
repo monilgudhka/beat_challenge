@@ -11,7 +11,7 @@
 
 # Installation and Setup
 - This is a java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
-- Input and output file path can be mentined in the 'config.properties' file
+- Input and output file path can be mentioned in the 'config.properties' file
 
 - Run BeatApplication through through terminal::
 1. Move to the directory where pom.xml is there
@@ -62,9 +62,11 @@
 # BenchMark Results
 - Single Threaded Program
 - Machin details:
- - 16 GB RAM
- - 250 GB HDD
- - 6 core i7 CPU
+ 1) 16 GB RAM 1600 MHz DDR3
+ 2) 250 GB HDD
+ 3) 2.2GHz Quad Core Intel i7 CPU
+ 4) Mac OS Catalina
+ 5)
 - Results:
- - Input file size 1.34GB
- - Time taken 30 seconds
+ 1) Input file size 1.34GB
+ 2) Time taken 30 seconds
