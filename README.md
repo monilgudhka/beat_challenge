@@ -41,12 +41,9 @@ Run BeatApplication file through through terminal::
 
 # Todo
 1. Remove if else and use design pattern as future requirements can change
-2. Specify file path in properties file
 3. Make this multithreaded
     3.1 either 1 reader thread and multiple consumer threads
     3.2 lmax disruptor
-4. Update variables names and add proper comments
-5. Add unit tests
 6. Add proper comment on class BeatChallenge's run and process methods
 7. Write detailed approach
 8. What if any tuple is empty?
