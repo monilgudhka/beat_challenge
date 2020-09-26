@@ -32,7 +32,7 @@ public class BeatChallenge {
     public void run(Path inputFilePath, Path outputFilePath) throws IOException {
         try (
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
-                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
+                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE);
         ) {
 
             String record;

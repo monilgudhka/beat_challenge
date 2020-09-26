@@ -7,16 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith ( MockitoExtension.class)
 class BeatChallengeTest {
 
     final BeatChallenge beatChallenge = new BeatChallenge (  new Converter (), new PositionAggregator (), new FareCalculator ());
@@ -36,16 +31,12 @@ class BeatChallengeTest {
     }
 
     @Test
-    @Disabled
     void runMethodSuccessScenarioTest_03 ( )throws IOException {
         Path inputFilePath = Paths.get("src/test/resources/paths.csv");
         Path outputFilePath = Paths.get("src/test/resources/output.csv");
-
-        BufferedReader reader = Files.newBufferedReader(inputFilePath);
-        BufferedWriter writer = mock(BufferedWriter.class);
+        BufferedReader reader = Files.newBufferedReader(outputFilePath);
         beatChallenge.run ( inputFilePath,outputFilePath );
-
-        BufferedWriter mockWriter = Mockito.mock(BufferedWriter.class);
+        assertEquals ( reader.readLine ( ), "1,10.297890691178765" );
     }
 
 
