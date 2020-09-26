@@ -2,16 +2,15 @@ package edu.challenge.beat.service;
 
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -29,12 +28,12 @@ class BeatChallengeTest {
 
     private final Path input = Paths.get("src/test/resources/input.csv");
 
+    private final Path output = Paths.get("src/test/resources/output.csv");
+
     @AfterEach
     void deleteInput() throws IOException {
         Files.deleteIfExists(input);
     }
-
-    private final Path output = Paths.get("src/test/resources/output.csv");
 
     @AfterEach
     void deleteOutput() throws IOException {
@@ -42,7 +41,7 @@ class BeatChallengeTest {
     }
 
     @Test
-    void runMethodShouldProcess() throws IOException {
+    void runMethodShouldProcessTest_01() throws IOException {
         Files.write(input, "position".getBytes());
 
         Ride ride = new Ride(1);
@@ -59,5 +58,11 @@ class BeatChallengeTest {
         List<String> data = Files.readAllLines(output);
         assertEquals(1, data.size());
         assertEquals("ride", data.get(0));
+    }
+
+    @Test
+    @Disabled
+    void runMethodEmptyRecordTest_02(){
+
     }
 }

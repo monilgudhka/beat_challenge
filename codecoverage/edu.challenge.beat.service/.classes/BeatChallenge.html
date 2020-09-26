@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96%
+    96.3%
   </span>
   <span class="absValue">
-    (24/ 25)
+    (26/ 27)
   </span>
 </td>
 </tr>
@@ -104,62 +104,65 @@
 <i>30</i>&nbsp;     * @throws IOException
 <i>31</i>&nbsp;     */
 <i>32</i>&nbsp;    public void run(Path inputFilePath, Path outputFilePath) throws IOException {
-<b class="nc"><i>33</i>&nbsp;        try (</b>
+<b class="fc"><i>33</i>&nbsp;        try (</b>
 <b class="fc"><i>34</i>&nbsp;                BufferedReader reader = Files.newBufferedReader(inputFilePath);</b>
 <b class="fc"><i>35</i>&nbsp;                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE);</b>
 <i>36</i>&nbsp;        ) {
 <i>37</i>&nbsp;
 <i>38</i>&nbsp;            String record;
 <b class="fc"><i>39</i>&nbsp;            while ((record = reader.readLine()) != null) {</b>
-<i>40</i>&nbsp;                //convert tuple into an object
-<b class="fc"><i>41</i>&nbsp;                Position position = converter.convert(record);</b>
-<b class="fc"><i>42</i>&nbsp;                Optional&lt;String&gt; optionalOutput = process(position);</b>
-<b class="fc"><i>43</i>&nbsp;                if (optionalOutput.isPresent()) {</b>
-<b class="fc"><i>44</i>&nbsp;                    String outputData = optionalOutput.get();</b>
-<b class="fc"><i>45</i>&nbsp;                    writer.write(outputData);</b>
-<b class="fc"><i>46</i>&nbsp;                    writer.newLine();</b>
-<i>47</i>&nbsp;                }
-<b class="fc"><i>48</i>&nbsp;            }</b>
-<i>49</i>&nbsp;            //end of input check
-<b class="fc"><i>50</i>&nbsp;            Optional&lt;String&gt; optionalOutput = process(null);</b>
-<i>51</i>&nbsp;
-<b class="fc"><i>52</i>&nbsp;            if (optionalOutput.isPresent()) {</b>
-<b class="fc"><i>53</i>&nbsp;                String outputData = optionalOutput.get();</b>
-<b class="fc"><i>54</i>&nbsp;                writer.write(outputData);</b>
-<b class="fc"><i>55</i>&nbsp;                writer.newLine();</b>
-<i>56</i>&nbsp;            }
-<b class="fc"><i>57</i>&nbsp;        }</b>
-<b class="fc"><i>58</i>&nbsp;    }</b>
-<i>59</i>&nbsp;
-<i>60</i>&nbsp;    /**
-<i>61</i>&nbsp;     * Helper Method for aggregating the ride data and calculate fare
-<i>62</i>&nbsp;     * @param position
-<i>63</i>&nbsp;     * @return
-<i>64</i>&nbsp;     */
-<i>65</i>&nbsp;    private Optional&lt;String&gt; process(Position position) {
-<b class="fc"><i>66</i>&nbsp;        return aggregator.aggregate(position)</b>
-<b class="fc"><i>67</i>&nbsp;                .map(this::calculateFare)</b>
-<b class="fc"><i>68</i>&nbsp;                .map(converter::convert);</b>
-<i>69</i>&nbsp;    }
-<i>70</i>&nbsp;
-<i>71</i>&nbsp;    /**
-<i>72</i>&nbsp;     * Helper Method for calculating the individual ride fare
-<i>73</i>&nbsp;     * @param ride
-<i>74</i>&nbsp;     * @return
-<i>75</i>&nbsp;     */
-<i>76</i>&nbsp;    private Ride calculateFare(Ride ride) {
-<b class="fc"><i>77</i>&nbsp;        double fare = fareCalculator.calculate(ride);</b>
-<b class="fc"><i>78</i>&nbsp;        ride.setFare(fare);</b>
-<b class="fc"><i>79</i>&nbsp;        return ride;</b>
-<i>80</i>&nbsp;    }
-<i>81</i>&nbsp;
-<i>82</i>&nbsp;}
+<b class="fc"><i>40</i>&nbsp;                if (record.isEmpty ()){</b>
+<b class="nc"><i>41</i>&nbsp;                    continue;</b>
+<i>42</i>&nbsp;                }
+<i>43</i>&nbsp;                //convert record into an object
+<b class="fc"><i>44</i>&nbsp;                Position position = converter.convert(record);</b>
+<b class="fc"><i>45</i>&nbsp;                Optional&lt;String&gt; optionalOutput = process(position);</b>
+<b class="fc"><i>46</i>&nbsp;                if (optionalOutput.isPresent()) {</b>
+<b class="fc"><i>47</i>&nbsp;                    String outputData = optionalOutput.get();</b>
+<b class="fc"><i>48</i>&nbsp;                    writer.write(outputData);</b>
+<b class="fc"><i>49</i>&nbsp;                    writer.newLine();</b>
+<i>50</i>&nbsp;                }
+<b class="fc"><i>51</i>&nbsp;            }</b>
+<i>52</i>&nbsp;            //end of input check
+<b class="fc"><i>53</i>&nbsp;            Optional&lt;String&gt; optionalOutput = process(null);</b>
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;            if (optionalOutput.isPresent()) {</b>
+<b class="fc"><i>56</i>&nbsp;                String outputData = optionalOutput.get();</b>
+<b class="fc"><i>57</i>&nbsp;                writer.write(outputData);</b>
+<b class="fc"><i>58</i>&nbsp;                writer.newLine();</b>
+<i>59</i>&nbsp;            }
+<b class="fc"><i>60</i>&nbsp;        }</b>
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    /**
+<i>64</i>&nbsp;     * Helper Method for aggregating the ride data and calculate fare
+<i>65</i>&nbsp;     * @param position
+<i>66</i>&nbsp;     * @return
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    private Optional&lt;String&gt; process(Position position) {
+<b class="fc"><i>69</i>&nbsp;        return aggregator.aggregate(position)</b>
+<b class="fc"><i>70</i>&nbsp;                .map(this::calculateFare)</b>
+<b class="fc"><i>71</i>&nbsp;                .map(converter::convert);</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     * Helper Method for calculating the individual ride fare
+<i>76</i>&nbsp;     * @param ride
+<i>77</i>&nbsp;     * @return
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    private Ride calculateFare(Ride ride) {
+<b class="fc"><i>80</i>&nbsp;        double fare = fareCalculator.calculate(ride);</b>
+<b class="fc"><i>81</i>&nbsp;        ride.setFare(fare);</b>
+<b class="fc"><i>82</i>&nbsp;        return ride;</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-26 23:04</div>
+    <div style="float:right;">generated on 2020-09-26 23:28</div>
 </div>
 </body>
 </html>

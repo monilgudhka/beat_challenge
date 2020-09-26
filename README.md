@@ -50,7 +50,6 @@
 3. Make this multithreaded
     3.1 either 1 reader thread and multiple consumer threads
     3.2 Lmax disruptor
-6. Add proper comment on class BeatChallenge's run and process methods
 7. Write detailed approach
 
 
