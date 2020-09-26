@@ -37,6 +37,9 @@ public class BeatChallenge {
 
             String record;
             while ((record = reader.readLine()) != null) {
+                if (record.isEmpty ()){
+                    continue;
+                }
                 //convert tuple into an object
                 Position position = converter.convert(record);
                 Optional<String> optionalOutput = process(position);
