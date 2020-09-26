@@ -40,7 +40,7 @@ public class BeatChallenge {
                 if (record.isEmpty ()){
                     continue;
                 }
-                //convert tuple into an object
+                //convert record into an object
                 Position position = converter.convert(record);
                 Optional<String> optionalOutput = process(position);
                 if (optionalOutput.isPresent()) {
