@@ -32,10 +32,6 @@ class ConverterTest {
     @Test
     void covertMethodRecordEmptyThrowsExceptionTest_03 ( ) {
         String emptyRecord = "";
-        Position resultPosition = new Position (1,
-                37.966195,
-                23.728613,
-                1405595026);
         assertThrows( NumberFormatException.class, () -> {
             converter.convert ( emptyRecord );
         });

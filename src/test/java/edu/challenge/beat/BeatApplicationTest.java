@@ -20,7 +20,7 @@ class BeatApplicationTest {
     }
 
     @Test
-    void mainThrowsNullPointerExceptionTest_01 ( ) throws IOException {
+    void mainMethodIntegrationTest_01 ( ) throws IOException {
 
         BeatApplication.main(null);
 

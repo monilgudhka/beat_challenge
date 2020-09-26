@@ -68,5 +68,5 @@
  2) Time taken 30 seconds
 
 # CodeCoverage Report
-- CodeCoverage report can be found under the CodeCoverage folder
+- CodeCoverage report can be found under the codecoverage folder
 - Current results: 88%
