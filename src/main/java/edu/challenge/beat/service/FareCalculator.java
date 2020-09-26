@@ -62,8 +62,8 @@ public class FareCalculator {
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
         return (AppConstants.RIDE_END_HOUR <= hour && hour <= AppConstants.RIDE_START_HOUR)
-                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance : AppConstants.DAY_TIME_PER_KM_FARE
-                * distance;
+                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance
+                : AppConstants.DAY_TIME_PER_KM_FARE * distance;
     }
 
     /**

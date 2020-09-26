@@ -4,12 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BeatChallengeTest {
@@ -28,14 +26,5 @@ class BeatChallengeTest {
         assertThrows( IOException.class, () -> {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get ( "/emptypath" ), StandardOpenOption.CREATE);
         });
-    }
-
-    @Test
-    void runMethodSuccessScenarioTest_03 ( )throws IOException {
-        Path inputFilePath = Paths.get("src/test/resources/paths.csv");
-        Path outputFilePath = Paths.get("src/test/resources/output.csv");
-        BufferedReader reader = Files.newBufferedReader(outputFilePath);
-        beatChallenge.run ( inputFilePath,outputFilePath );
-        assertEquals ( reader.readLine ( ), "1,10.3" );
     }
 }

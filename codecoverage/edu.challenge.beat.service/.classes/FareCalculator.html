@@ -136,8 +136,8 @@
 <b class="fc"><i>62</i>&nbsp;                .atOffset(ZoneOffset.UTC)</b>
 <b class="fc"><i>63</i>&nbsp;                .toLocalTime().getHour();</b>
 <b class="fc"><i>64</i>&nbsp;        return (AppConstants.RIDE_END_HOUR &lt;= hour &amp;&amp; hour &lt;= AppConstants.RIDE_START_HOUR)</b>
-<i>65</i>&nbsp;                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance : AppConstants.DAY_TIME_PER_KM_FARE
-<i>66</i>&nbsp;                * distance;
+<i>65</i>&nbsp;                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance
+<i>66</i>&nbsp;                : AppConstants.DAY_TIME_PER_KM_FARE * distance;
 <i>67</i>&nbsp;    }
 <i>68</i>&nbsp;
 <i>69</i>&nbsp;    /**
@@ -180,7 +180,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-26 22:30</div>
+    <div style="float:right;">generated on 2020-09-26 22:54</div>
 </div>
 </body>
 </html>

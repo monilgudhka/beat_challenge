@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class PositionAggregatorTest {
 
     final PositionAggregator positionAggregator = new PositionAggregator ();
-    static Position position;
+    static Position positionOfRide1;
 
     @BeforeAll
     static void setup ( ){
-        position = new Position ( 1,
+        positionOfRide1 = new Position ( 1,
                 37.966195,
                 23.728613,
                 1405595001);
@@ -31,7 +31,7 @@ class PositionAggregatorTest {
 
     @Test
     void aggregatePositionRideNullTest_02 ( ){
-        assertEquals( Optional.empty (),positionAggregator.aggregate ( position ) );
+        assertEquals( Optional.empty (),positionAggregator.aggregate ( positionOfRide1 ) );
     }
 
     @Test
@@ -40,17 +40,22 @@ class PositionAggregatorTest {
                 37.966195,
                 23.728613,
                 1405595001);
-        assertEquals ( Optional.empty() , positionAggregator.aggregate ( position ) );
+
+        assertEquals ( Optional.empty() , positionAggregator.aggregate ( positionOfRide1 ) );
+
         Optional<Ride> aggregate = positionAggregator.aggregate(positionOfRide2);
         assertTrue(aggregate.isPresent());
+
         Ride ride = aggregate.get();
         assertEquals(1, ride.getId());
         assertEquals(1, ride.getPositions().size());
-        assertEquals(position, ride.getPositions().get(0));
+        assertEquals(positionOfRide1, ride.getPositions().get(0));
 
         aggregate = positionAggregator.aggregate(null);
         assertTrue(aggregate.isPresent());
+
         ride = aggregate.get();
+
         assertEquals(2, ride.getId());
         assertEquals(1, ride.getPositions().size());
         assertEquals(positionOfRide2, ride.getPositions().get(0));
