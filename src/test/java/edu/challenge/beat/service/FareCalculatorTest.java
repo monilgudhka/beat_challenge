@@ -50,7 +50,22 @@ class FareCalculatorTest {
     }
 
     @Test
-    void calculateMethodMaxSpeedTest_04 ( ) {
+    void calculateMethodAvgSpeedNightTimeFareCalculationTest_04 ( ) {
+        Position position1 = new Position ( 1,37.966627,23.728263,1601092635 );
+        Position position2 = new Position ( 1,37.935597,23.625688,1601094315 );
+
+        List <Position> positionList = new ArrayList<>();
+        positionList.add(position1);
+        positionList.add(position2);
+
+        Ride ride = Mockito.mock ( Ride.class );
+        when(ride.getPositions ()).thenReturn(positionList);
+
+        assertEquals(13.82,fareCalculator.calculate ( ride ));
+    }
+
+    @Test
+    void calculateMethodMaxSpeedTest_05 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1405594966 );
         //invalid entry
         Position position2 = new Position ( 1,30.935597,20.728308,1405596212 );
