@@ -36,7 +36,7 @@ class BeatChallengeTest {
         Path outputFilePath = Paths.get("src/test/resources/output.csv");
         BufferedReader reader = Files.newBufferedReader(outputFilePath);
         beatChallenge.run ( inputFilePath,outputFilePath );
-        assertEquals ( reader.readLine ( ), "1,10.297890691178765" );
+        assertEquals ( reader.readLine ( ), "1,10.30" );
     }
 
 

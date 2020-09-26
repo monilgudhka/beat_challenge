@@ -15,13 +15,12 @@ import java.util.Properties;
  */
 public class BeatApplication {
 
-    final private Properties properties = new Properties();
+    static final private Properties properties = new Properties();
 
     public static void main(String[] args) throws IOException {
         long st = System.currentTimeMillis ();
 
         //fetch input and output file names
-        Properties properties = new Properties();
         String appConfigPath = "config.properties";
         InputStream inputStream = Thread.currentThread ().getContextClassLoader ().getResourceAsStream ( appConfigPath );
         properties.load(inputStream);
