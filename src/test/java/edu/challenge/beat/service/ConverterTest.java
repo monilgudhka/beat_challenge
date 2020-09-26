@@ -5,13 +5,14 @@ import edu.challenge.beat.model.Ride;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ConverterTest {
 
     final Converter converter = new Converter ();
 
     @Test
-    void convertPositiveScenarioTest_01 ( ) {
+    void convertMethodPositiveScenarioTest_01 ( ) {
         String dummyRecord = "1,37.966195,23.728613,1405595026";
         Position resultPosition = new Position (1,
                                           37.966195,
@@ -21,10 +22,22 @@ class ConverterTest {
     }
 
     @Test
-    void covertOverloadedPositiveScenarioTest_02 ( ) {
+    void covertMethodOverloadedPositiveScenarioTest_02 ( ) {
         Ride ride = new Ride(1);
         ride.setFare ( 3.47 );
         String result = "1,3.47";
         assertEquals ( result, converter.convert ( ride ));
+    }
+
+    @Test
+    void covertMethodRecordEmptyThrowsExceptionTest_03 ( ) {
+        String emptyRecord = "";
+        Position resultPosition = new Position (1,
+                37.966195,
+                23.728613,
+                1405595026);
+        assertThrows( NumberFormatException.class, () -> {
+            converter.convert ( emptyRecord );
+        });
     }
 }
