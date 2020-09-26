@@ -26,7 +26,7 @@ public class FareCalculator {
         if (positions.isEmpty()) {
             return -1;
         }
-        double totalFare = AppConstants.InitialFare;
+        double totalFare = AppConstants.INITIAL_FARE;
         double idleTime = 0;
         Position source = positions.get(0);
         for (int index = 1; index < positions.size(); index++) {
@@ -36,18 +36,18 @@ public class FareCalculator {
             double time = calcTimeInHours(source, destination);
             double speed = calcSpeed(distance, time);
 
-            if (speed < AppConstants.MinSpeed) {
+            if (speed < AppConstants.MIN_SPEED ) {
                 idleTime += time;
                 source = destination;
-            } else if (speed <= AppConstants.MaxSpeed) {
+            } else if (speed <= AppConstants.MAX_SPEED ) {
                 double fare = calcFare(distance, source.getTimestamp());
                 totalFare += fare;
                 source = destination;
             }
         }
 
-        totalFare += ((int) idleTime * AppConstants.IdleTimePerHourlyFare);
-        return Math.max(totalFare, AppConstants.MinRideFare);
+        totalFare += ((int) idleTime * AppConstants.IDLE_TIME_PER_HOURLY_FARE);
+        return Math.max(totalFare, AppConstants.MIN_RIDE_FARE );
     }
 
     /**
@@ -60,7 +60,7 @@ public class FareCalculator {
         int hour = Instant.ofEpochSecond(timestamp)
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
-        return (AppConstants.RideEndHour <= hour && hour <= AppConstants.RideStartHour) ? AppConstants.NightTimePerKmFare * distance : AppConstants.DayTimePerKmFare * distance;
+        return (AppConstants.RIDE_END_HOUR <= hour && hour <= AppConstants.RIDE_START_HOUR) ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance : AppConstants.DAY_TIME_PER_KM_FARE * distance;
     }
 
     /**
