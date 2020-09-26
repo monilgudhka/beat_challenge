@@ -9,11 +9,11 @@
 6. Input file records are comma-separated
 
 # Installation and Setup
-- This is a java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
+- This is a Java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
 - Input and output file path can be mentioned in the 'config.properties' file
 
 - Run BeatApplication through terminal::
-1. Move to the directory where pom.xml is there
+1. Move to the directory where pom.xml exists
 2. Build jar using the command "mvn clean install"
 3. Once the jar is built run from the terminal using the below command
 4. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
@@ -21,7 +21,7 @@
 
 
 - Run BeatApplication file through IntelliJIDEA::
-1. Install: Maven Helper, Sonarlint, Lombok plugins, Coverage
+1. Plugins to Install: Maven Helper, Sonarlint, Lombok, Coverage
 2. Setup project JDK to 1.8
 3. Run BeatApplication.java file
 
@@ -52,7 +52,6 @@
     3.2 Lmax disruptor
 6. Add proper comment on class BeatChallenge's run and process methods
 7. Write detailed approach
-8. What if any tuple is empty?
 
 
 # Benchmark Results
@@ -68,5 +67,5 @@
  2) Time taken 30 seconds
 
 # CodeCoverage Report
-- CodeCoverage report can be found under the codecoverage folder
-- Current results: 88%
+- CodeCoverage report can be found under the 'codecoverage/index.html' folder
+- Current coverage percentage: 88%
