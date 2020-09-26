@@ -29,16 +29,10 @@ class BeatChallengeTest {
 
     private final Path input = Paths.get("src/test/resources/input.csv");
 
-    @BeforeEach
-    void createInput() throws IOException {
-        Files.write(input, "position".getBytes());
-    }
-
     @AfterEach
     void deleteInput() throws IOException {
         Files.deleteIfExists(input);
     }
-
 
     private final Path output = Paths.get("src/test/resources/output.csv");
 
@@ -49,6 +43,8 @@ class BeatChallengeTest {
 
     @Test
     void runMethodShouldProcess() throws IOException {
+        Files.write(input, "position".getBytes());
+
         Ride ride = new Ride(1);
         Position position = new Position(1, 37, 23, 1405594957);
 
