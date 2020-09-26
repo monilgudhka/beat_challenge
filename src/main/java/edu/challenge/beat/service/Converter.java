@@ -4,12 +4,12 @@ import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 
 /**
- * Class converting the string tuple(from input file) into object
+ * Class converting the string record(from input file) into object
  */
 public class Converter {
 
     /**
-     * Method to convert string tuple data into Position object
+     * Method to convert string record data into Position object
      * @param record
      * @return
      */
