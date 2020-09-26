@@ -28,7 +28,7 @@ public class Converter {
      * @return
      */
     public String convert(Ride ride) {
-        return ride.getId() + "," + ride.getFare ();
+        return ride.getId() + " , " + ride.getFare ();
     }
 
 }

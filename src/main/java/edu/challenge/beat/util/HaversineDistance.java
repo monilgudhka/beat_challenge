@@ -7,6 +7,8 @@ public final class HaversineDistance {
 
     private static final double EARTH_RADIUS = 6371.0088; // Radius of the earth
 
+    private  HaversineDistance(){}
+
     public static double getDistance(double latitudeSource, double longitudeSource, double latitudeDestination, double longitudeDestination) {
         double latDistance = toRad(latitudeDestination - latitudeSource);
         double lonDistance = toRad(longitudeDestination - longitudeSource);

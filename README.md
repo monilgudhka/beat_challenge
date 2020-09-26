@@ -37,8 +37,9 @@
 
 # Design Approach
 1. Scan tuples serially
-2. Wait for next to Ride to start
-3. Calculate distance, time , and speed of each Segment in a Ride
+  - ignore empty tuples
+2. Keep fetching until next ride starts
+3. Calculate distance, time ,and speed of each segment in a Ride
 4. Filter the tuple if calculated speed > 100 km/hr
 5. Calculate current fare
 6. Store the results
@@ -51,7 +52,8 @@
     3.1 either 1 reader thread and multiple consumer threads
     3.2 Lmax disruptor
 7. Write detailed approach
-8. Manually verify output
+8. FareCalculator line 50 within for loop?
+9. test cases multiple places are hardcoded?
 
 
 # Benchmark Results
@@ -68,4 +70,4 @@
 
 # CodeCoverage Report
 - CodeCoverage report can be found under the 'codecoverage/index.html' folder
-- Current coverage percentage: 88%
+- Current coverage percentage: 88.9%

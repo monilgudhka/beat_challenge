@@ -48,7 +48,13 @@ class FareCalculatorTest {
 
         assertEquals(8.43,fareCalculator.calculate ( ride ));
     }
-
+    /*
+    * manual calculation
+    * dist = 9.633043980754872
+    * time = 0.46
+    * speed = 20+
+    * fare = 13.82
+    */
     @Test
     void calculateMethodAvgSpeedNightTimeFareCalculationTest_04 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1601092635 );
@@ -67,7 +73,7 @@ class FareCalculatorTest {
     @Test
     void calculateMethodMaxSpeedTest_05 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1405594966 );
-        //invalid entry
+        //invalid entry, U > 100kmph
         Position position2 = new Position ( 1,30.935597,20.728308,1405596212 );
         Position position3 = new Position ( 1,37.935597,23.625688,1405596212 );
 
