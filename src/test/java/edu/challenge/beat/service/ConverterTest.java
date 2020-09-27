@@ -12,7 +12,7 @@ class ConverterTest {
     final Converter converter = new Converter ();
 
     @Test
-    void convertMethodPositiveScenarioTest_01 ( ) {
+    void convertMethod_PositiveScenario_Test_01 ( ) {
         String dummyRecord = "1,37.966195,23.728613,1405595026";
         Position resultPosition = new Position (1,
                                           37.966195,
@@ -22,7 +22,7 @@ class ConverterTest {
     }
 
     @Test
-    void covertMethodOverloadedPositiveScenarioTest_02 ( ) {
+    void covertMethod_OverloadedPositiveScenario_Test_02 ( ) {
         Ride ride = new Ride(1);
         ride.setFare ( 3.47 );
         String result = "1,3.47";
@@ -30,7 +30,7 @@ class ConverterTest {
     }
 
     @Test
-    void covertMethodRecordEmptyThrowsExceptionTest_03 ( ) {
+    void covertMethod_RecordEmptyThrowsException_Test_03 ( ) {
         String emptyRecord = "";
         assertThrows( NumberFormatException.class, () -> {
             converter.convert ( emptyRecord );

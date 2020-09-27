@@ -1,12 +1,11 @@
 ## Program to calculate fare estimate of a ride based on its data.
 
 # Assumptions
-1. There are always at least 2 tuples per id.
-2. Data is always sorted
-3. Entries are positive
-4. No partial tuple
-5. Ride fare is calculated at the end of the ride only, there is no intermediate stage
-6. Input file records are comma-separated
+1. Data is always sorted
+2. Entries are positive
+3. No partial tuple
+4. Ride fare is calculated at the end of the ride only, there is no intermediate stage
+5. Input file records are comma-separated
 
 # Installation and Setup
 - This is a Java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.

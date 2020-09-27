@@ -23,12 +23,12 @@ class PositionAggregatorTest {
     }
 
     @Test
-    void aggregatePositionRideNullTest_02 ( ){
+    void aggregateMethod_PositionRideNull_Test_02 ( ){
         assertEquals( Optional.empty (),positionAggregator.aggregate ( positionOfRide1 ) );
     }
 
     @Test
-    void aggregatePositionRideNotNullTest_03 ( ){
+    void aggregateMethod_PositionRideNotNull_Test_03 ( ){
         Position positionOfRide2 = new Position(2,
                 37.966195,
                 23.728613,

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BeatApplicationTest {
 
-    private final Path output = Paths.get("src/test/resources/outputFile.csv");
+    private final Path output = Paths.get("src/test/resources/outputFile.txt");
 
     @AfterEach
     void deleteOutput( ) throws IOException {
@@ -20,13 +20,14 @@ class BeatApplicationTest {
     }
 
     @Test
-    void mainMethodIntegrationTest_01 ( ) throws IOException {
+    void mainMethod_IntegrationTest_01 ( ) throws IOException {
 
         BeatApplication.main(null);
 
         List<String> data = Files.readAllLines(output);
         assertEquals( 2, data.size() );
         assertEquals ( "1,10.3", data.get(0) );
+        assertEquals ( "2,7.96", data.get(1) );
     }
 
 }

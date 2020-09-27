@@ -40,7 +40,7 @@ class BeatChallengeTest {
     }
 
     @Test
-    void runMethodShouldProcessTest_01() throws IOException {
+    void runMethod_ShouldProcess_Test_01() throws IOException {
         Files.write(input, "position".getBytes());
 
         Ride ride = new Ride(1);
@@ -60,7 +60,7 @@ class BeatChallengeTest {
     }
 
     @Test
-    void runMethodEmptyRecordTest_02() throws IOException {
+    void runMethod_EmptyRecord_Test_02() throws IOException {
         Files.write(input, "position\n   ".getBytes());
 
         beatChallenge.run(input, output);

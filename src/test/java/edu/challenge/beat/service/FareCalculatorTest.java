@@ -15,13 +15,13 @@ class FareCalculatorTest {
     final FareCalculator fareCalculator = new FareCalculator ();
 
     @Test
-    void calculateMethodEmptyPositionTest_01 ( ) {
+    void calculateMethod_EmptyPosition_Test_01 ( ) {
         Ride ride = new Ride(1);
         assertEquals(-1,fareCalculator.calculate ( ride ));
     }
 
     @Test
-    void calculateMethodMinSpeedTest_02 ( ) {
+    void calculateMethod_MinSpeed_Test_02 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1405594966 );
         Position position2 = new Position ( 1,37.966660,23.728308,1405594957 );
         List <Position> positionList = new ArrayList<>();
@@ -35,7 +35,7 @@ class FareCalculatorTest {
     }
 
     @Test
-    void calculateMethodAvgSpeedTest_03 ( ) {
+    void calculateMethod_AvgSpeed_Test_03 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1405594966 );
         Position position2 = new Position ( 1,37.935597,23.625688,1405596212 );
 
@@ -56,7 +56,7 @@ class FareCalculatorTest {
     * fare = 13.82
     */
     @Test
-    void calculateMethodAvgSpeedNightTimeFareCalculationTest_04 ( ) {
+    void calculateMethod_AvgSpeedNightTimeFareCalculation_Test_04 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1601092635 );
         Position position2 = new Position ( 1,37.935597,23.625688,1601094315 );
 
@@ -71,7 +71,7 @@ class FareCalculatorTest {
     }
 
     @Test
-    void calculateMethodMaxSpeedTest_05 ( ) {
+    void calculateMethod_MaxSpeed_Test_05 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1405594966 );
         //invalid entry, U > 100kmph
         Position position2 = new Position ( 1,30.935597,20.728308,1405596212 );
