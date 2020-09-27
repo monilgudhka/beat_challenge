@@ -5,7 +5,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html id="htmlId">
 <head>
-  <title>Coverage Report :: Position</title>
+  <title>Coverage Report :: StringUtil</title>
   <style type="text/css">
     @import "../../.css/coverage.css";
   </style>
@@ -17,10 +17,10 @@
 <div class="content">
 <div class="breadCrumbs">
     [ <a href="../../index.html">all classes</a> ]
-    [ <a href="../index.html">edu.challenge.beat.model</a> ]
+    [ <a href="../index.html">edu.challenge.beat.util</a> ]
 </div>
 
-<h1>Coverage Summary for Class: Position (edu.challenge.beat.model)</h1>
+<h1>Coverage Summary for Class: StringUtil (edu.challenge.beat.util)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@
 </th>
 </tr>
 <tr>
-  <td class="name">Position</td>
+  <td class="name">StringUtil</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -50,18 +50,18 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    50%
   </span>
   <span class="absValue">
-    (6/ 6)
+    (1/ 2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    80%
   </span>
   <span class="absValue">
-    (6/ 6)
+    (4/ 5)
   </span>
 </td>
 </tr>
@@ -72,24 +72,21 @@
 <br/>
 
 
-<div class="sourceCode"><i>1</i>&nbsp;package edu.challenge.beat.model;
+<div class="sourceCode"><i>1</i>&nbsp;package edu.challenge.beat.util;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import lombok.Data;
-<i>4</i>&nbsp;import lombok.RequiredArgsConstructor;
-<i>5</i>&nbsp;
-<i>6</i>&nbsp;/**
-<i>7</i>&nbsp; * Model class with rideId, latitude, longitude and timestamp for each record
-<i>8</i>&nbsp; */
-<b class="fc"><i>9</i>&nbsp;@Data</b>
-<b class="fc"><i>10</i>&nbsp;@RequiredArgsConstructor</b>
-<i>11</i>&nbsp;public class Position {
-<i>12</i>&nbsp;
-<b class="fc"><i>13</i>&nbsp;    private final long rideId;</b>
-<b class="fc"><i>14</i>&nbsp;    private final double latitude;</b>
-<b class="fc"><i>15</i>&nbsp;    private final double longitude;</b>
-<b class="fc"><i>16</i>&nbsp;    private final long timestamp;</b>
-<i>17</i>&nbsp;
-<i>18</i>&nbsp;}
+<i>3</i>&nbsp;public final class StringUtil {
+<i>4</i>&nbsp;
+<b class="nc"><i>5</i>&nbsp;    private StringUtil(){}</b>
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;    public static boolean checkTrimEmpty( final String str) {
+<b class="fc"><i>8</i>&nbsp;        for(int index = 0; index &lt; str.length(); index++) {</b>
+<b class="fc"><i>9</i>&nbsp;            if(!Character.isWhitespace(str.charAt(index))) {</b>
+<b class="fc"><i>10</i>&nbsp;                return false;</b>
+<i>11</i>&nbsp;            }
+<i>12</i>&nbsp;        }
+<b class="fc"><i>13</i>&nbsp;        return true;</b>
+<i>14</i>&nbsp;    }
+<i>15</i>&nbsp;}
 </div>
 </div>
 

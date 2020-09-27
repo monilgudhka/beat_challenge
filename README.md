@@ -76,4 +76,4 @@
 
 # CodeCoverage Report
 - CodeCoverage report can be found under the 'codecoverage/index.html' folder
-- Current coverage percentage: 88.9%
+- Current coverage percentage: 90%

@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.8%
+    93.3%
   </span>
   <span class="absValue">
-    (15/ 16)
+    (14/ 15)
   </span>
 </td>
 </tr>
@@ -83,46 +83,60 @@
 <i>9</i>&nbsp;import java.nio.file.Path;
 <i>10</i>&nbsp;import java.nio.file.Paths;
 <i>11</i>&nbsp;import java.util.Properties;
-<i>12</i>&nbsp;
-<i>13</i>&nbsp;/**
-<i>14</i>&nbsp; * Main class
-<i>15</i>&nbsp; */
-<b class="nc"><i>16</i>&nbsp;public class BeatApplication {</b>
-<i>17</i>&nbsp;
-<b class="fc"><i>18</i>&nbsp;    private static final Properties properties = new Properties();</b>
+<i>12</i>&nbsp;import org.slf4j.Logger;
+<i>13</i>&nbsp;import org.slf4j.LoggerFactory;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; * Main class
+<i>17</i>&nbsp; */
+<b class="nc"><i>18</i>&nbsp;public class BeatApplication {</b>
 <i>19</i>&nbsp;
-<i>20</i>&nbsp;    public static void main(String[] args) throws IOException {
-<b class="fc"><i>21</i>&nbsp;        long st = System.currentTimeMillis ();</b>
-<i>22</i>&nbsp;
-<i>23</i>&nbsp;        //fetch input and output file names
-<b class="fc"><i>24</i>&nbsp;        String appConfigPath = &quot;config.properties&quot;;</b>
-<b class="fc"><i>25</i>&nbsp;        InputStream inputStream = Thread.currentThread ().getContextClassLoader ().getResourceAsStream ( appConfigPath );</b>
-<b class="fc"><i>26</i>&nbsp;        properties.load(inputStream);</b>
-<i>27</i>&nbsp;
-<i>28</i>&nbsp;        //read the file paths
-<b class="fc"><i>29</i>&nbsp;        Path inputFile = Paths.get(properties.getProperty ( &quot;inputFilePath&quot; ));</b>
-<b class="fc"><i>30</i>&nbsp;        Path outputFile = Paths.get(properties.getProperty ( &quot;outputFilePath&quot; ));</b>
-<i>31</i>&nbsp;
-<i>32</i>&nbsp;        //main task logic
-<b class="fc"><i>33</i>&nbsp;        Converter converter = new Converter();</b>
-<b class="fc"><i>34</i>&nbsp;        PositionAggregator aggregator = new PositionAggregator();</b>
-<b class="fc"><i>35</i>&nbsp;        FareCalculator fareCalculator = new FareCalculator();</b>
-<i>36</i>&nbsp;
-<b class="fc"><i>37</i>&nbsp;        BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);</b>
-<b class="fc"><i>38</i>&nbsp;        challenge.run(inputFile, outputFile);</b>
-<i>39</i>&nbsp;
-<i>40</i>&nbsp;
-<b class="fc"><i>41</i>&nbsp;        long et = System.currentTimeMillis ();</b>
-<b class="fc"><i>42</i>&nbsp;        System.out.println(&quot;Time taken to run the task(in milliseconds)= &quot;+ (et - st));</b>
-<b class="fc"><i>43</i>&nbsp;    }</b>
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * Fetch input and output file paths
+<i>22</i>&nbsp;     */
+<b class="fc"><i>23</i>&nbsp;    private static final Properties PROPERTIES = new Properties();</b>
+<i>24</i>&nbsp;    private static final String APP_CONFIG_PATH = &quot;config.properties&quot;;
+<b class="fc"><i>25</i>&nbsp;    private static Logger logger = LoggerFactory.getLogger(BeatApplication.class);</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * @param args
+<i>29</i>&nbsp;     * @throws IOException
+<i>30</i>&nbsp;     */
+<i>31</i>&nbsp;    public static void main(final String[] args) throws IOException {
+<i>32</i>&nbsp;        //long st = System.currentTimeMillis ();
+<i>33</i>&nbsp;
+<b class="fc"><i>34</i>&nbsp;        try(InputStream inputStream = Thread.currentThread ()</b>
+<b class="fc"><i>35</i>&nbsp;                .getContextClassLoader ().getResourceAsStream ( APP_CONFIG_PATH )) {</b>
+<b class="fc"><i>36</i>&nbsp;            PROPERTIES.load ( inputStream );</b>
+<b class="fc"><i>37</i>&nbsp;        }</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;        /**
+<i>40</i>&nbsp;         * Read the file paths
+<i>41</i>&nbsp;         */
+<b class="fc"><i>42</i>&nbsp;        final Path inputFile = Paths.get( PROPERTIES.getProperty ( &quot;inputFilePath&quot; ));</b>
+<b class="fc"><i>43</i>&nbsp;        final Path outputFile = Paths.get( PROPERTIES.getProperty ( &quot;outputFilePath&quot; ));</b>
 <i>44</i>&nbsp;
-<i>45</i>&nbsp;}
+<i>45</i>&nbsp;        /**
+<i>46</i>&nbsp;         * Main task logic
+<i>47</i>&nbsp;         */
+<b class="fc"><i>48</i>&nbsp;        final Converter converter = new Converter();</b>
+<b class="fc"><i>49</i>&nbsp;        final PositionAggregator aggregator = new PositionAggregator();</b>
+<b class="fc"><i>50</i>&nbsp;        final FareCalculator fareCalculator = new FareCalculator();</b>
+<i>51</i>&nbsp;
+<b class="fc"><i>52</i>&nbsp;        final BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);</b>
+<b class="fc"><i>53</i>&nbsp;        challenge.run(inputFile, outputFile);</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;        //long et = System.currentTimeMillis ();
+<i>56</i>&nbsp;        //logger.info (&quot;Time taken to run the task(in milliseconds)= {} &quot;,(et - st));
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-27 17:06</div>
+    <div style="float:right;">generated on 2020-09-27 20:28</div>
 </div>
 </body>
 </html>
