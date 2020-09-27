@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  * Class reading the input file, send data for processing and write the required output data
- * into the output.csv file
+ * into the output.txt file
  */
 @RequiredArgsConstructor
 public class BeatChallenge {

@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    84.6%
+    88.9%
   </span>
   <span class="absValue">
-    (11/ 13)
+    (8/ 9)
   </span>
 </td>
 </tr>
@@ -77,13 +77,13 @@
 <i>3</i>&nbsp;/**
 <i>4</i>&nbsp; * Class calculating https://en.wikipedia.org/wiki/Haversine_formula
 <i>5</i>&nbsp; */
-<b class="nc"><i>6</i>&nbsp;public final class HaversineDistance {</b>
+<i>6</i>&nbsp;public final class HaversineDistance {
 <i>7</i>&nbsp;
 <i>8</i>&nbsp;    private static final double EARTH_RADIUS = 6371.0088; // Radius of the earth
 <i>9</i>&nbsp;
 <b class="nc"><i>10</i>&nbsp;    private  HaversineDistance(){}</b>
-<b class="fc"><i>11</i>&nbsp;</b>
-<b class="fc"><i>12</i>&nbsp;    public static double getDistance(double latitudeSource, double longitudeSource, double latitudeDestination, double longitudeDestination) {</b>
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    public static double getDistance(double latitudeSource, double longitudeSource, double latitudeDestination, double longitudeDestination) {
 <b class="fc"><i>13</i>&nbsp;        double latDistance = toRad(latitudeDestination - latitudeSource);</b>
 <b class="fc"><i>14</i>&nbsp;        double lonDistance = toRad(longitudeDestination - longitudeSource);</b>
 <b class="fc"><i>15</i>&nbsp;        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) +</b>
@@ -92,7 +92,7 @@
 <b class="fc"><i>18</i>&nbsp;        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));</b>
 <b class="fc"><i>19</i>&nbsp;        return EARTH_RADIUS * c;</b>
 <i>20</i>&nbsp;    }
-<b class="fc"><i>21</i>&nbsp;</b>
+<i>21</i>&nbsp;
 <i>22</i>&nbsp;    private static double toRad(Double value) {
 <b class="fc"><i>23</i>&nbsp;        return value * Math.PI / 180;</b>
 <i>24</i>&nbsp;    }
@@ -102,7 +102,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-27 01:36</div>
+    <div style="float:right;">generated on 2020-09-27 16:54</div>
 </div>
 </body>
 </html>

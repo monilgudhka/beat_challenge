@@ -27,7 +27,7 @@ class BeatChallengeTest {
 
     private final Path input = Paths.get("src/test/resources/input.csv");
 
-    private final Path output = Paths.get("src/test/resources/output.csv");
+    private final Path output = Paths.get("src/test/resources/output.txt");
 
     @AfterEach
     void deleteInputFile() throws IOException {

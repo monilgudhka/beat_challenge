@@ -39,10 +39,10 @@
   <td class="name">FareCalculator</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    85.7%
   </span>
   <span class="absValue">
-    (7/ 7)
+    (6/ 7)
   </span>
 </td>
 <td class="coverageStat">
@@ -50,7 +50,7 @@
     100%
   </span>
   <span class="absValue">
-    (34/ 34)
+    (33/ 33)
   </span>
 </td>
 </tr>
@@ -67,25 +67,25 @@
     <td class="name">FareCalculator$MockitoMock$1562594476$auxiliary$gfUmpyr7</td>
   </tr>
   <tr>
-    <td class="name">FareCalculator$MockitoMock$685621690</td>
+    <td class="name">FareCalculator$MockitoMock$4630268</td>
   </tr>
   <tr>
-    <td class="name">FareCalculator$MockitoMock$685621690$auxiliary$cTEnoeE5</td>
+    <td class="name">FareCalculator$MockitoMock$4630268$auxiliary$BEZEV0MN</td>
   </tr>
   <tr>
-    <td class="name">FareCalculator$MockitoMock$685621690$auxiliary$KYkP5TrR</td>
+    <td class="name">FareCalculator$MockitoMock$4630268$auxiliary$USb0RHeN</td>
   </tr>
   <tr>
-    <td class="name">FareCalculator$MockitoMock$685621690$auxiliary$SXNjK2Id</td>
+    <td class="name">FareCalculator$MockitoMock$4630268$auxiliary$xfNaSiMu</td>
   </tr>
 <tr>
   <td class="name"><strong>total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    85.7%
   </span>
   <span class="absValue">
-    (7/ 7)
+    (6/ 7)
   </span>
 </td>
 <td class="coverageStat">
@@ -93,7 +93,7 @@
     100%
   </span>
   <span class="absValue">
-    (34/ 34)
+    (33/ 33)
   </span>
 </td>
 </tr>
@@ -120,8 +120,8 @@
 <i>15</i>&nbsp; */
 <b class="fc"><i>16</i>&nbsp;public class FareCalculator {</b>
 <i>17</i>&nbsp;
-<i>18</i>&nbsp;    private static final int SecondToHourly = 3600;
-<b class="fc"><i>19</i>&nbsp;    private static final DecimalFormat decimalFormat = new DecimalFormat(&quot;#.##&quot;);</b>
+<b class="fc"><i>18</i>&nbsp;    private final int SecondToHourly = 3600;</b>
+<b class="fc"><i>19</i>&nbsp;    private final DecimalFormat decimalFormat = new DecimalFormat(&quot;#.##&quot;);</b>
 <i>20</i>&nbsp;
 <i>21</i>&nbsp;    /**
 <i>22</i>&nbsp;     * Method for calculating fare for each ride
@@ -167,8 +167,8 @@
 <b class="fc"><i>62</i>&nbsp;                .atOffset(ZoneOffset.UTC)</b>
 <b class="fc"><i>63</i>&nbsp;                .toLocalTime().getHour();</b>
 <b class="fc"><i>64</i>&nbsp;        return (AppConstants.RIDE_END_HOUR &lt;= hour &amp;&amp; hour &lt;= AppConstants.RIDE_START_HOUR)</b>
-<b class="fc"><i>65</i>&nbsp;                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance</b>
-<b class="fc"><i>66</i>&nbsp;                : AppConstants.DAY_TIME_PER_KM_FARE * distance;</b>
+<i>65</i>&nbsp;                ? AppConstants.NIGHT_TIME_PER_KM_FARE * distance
+<i>66</i>&nbsp;                : AppConstants.DAY_TIME_PER_KM_FARE * distance;
 <i>67</i>&nbsp;    }
 <i>68</i>&nbsp;
 <i>69</i>&nbsp;    /**
@@ -211,7 +211,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-27 01:36</div>
+    <div style="float:right;">generated on 2020-09-27 16:54</div>
 </div>
 </body>
 </html>
