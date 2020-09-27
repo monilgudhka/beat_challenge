@@ -10,10 +10,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class reading the input file, send data for processing
@@ -26,7 +29,7 @@ public class BeatChallenge {
     private final Converter converter;
     private final PositionAggregator aggregator;
     private final FareCalculator fareCalculator;
-    private static Logger logger = LoggerFactory.getLogger(BeatChallenge.class);
+    private static final Logger logger = LogManager.getLogger( BeatChallenge.class );
 
     /**
      * @param inputFilePath
@@ -34,23 +37,58 @@ public class BeatChallenge {
      * @throws IOException
      */
     public void run(final Path inputFilePath, final Path outputFilePath) throws IOException {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
         try (
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
                 BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
         ) {
-            for (AtomicReference < String > record = new AtomicReference <> ( reader.readLine ( ) ); record.get ( ) != null; record.set ( reader.readLine ( ) )) {
+            for (AtomicReference < String > record = new AtomicReference <> ( reader.readLine ( ) );
+                 record.get ( ) != null; record.set ( reader.readLine ( ) )) {
 
                 if ( StringUtil.checkTrimEmpty ( record.get ( ) )){
                     continue;
                 }
                 final Position position = converter.convert( record.get ( ) );
-                processAndWriteRecord ( writer , position );
-
+                //processAndWriteRecord ( writer , position );
+                executorService.submit(() -> this.safeProcessAndWriteRecord ( writer , position ));
             }
             /**
              * End of input check, that means last ride has been processed
              */
-            processAndWriteRecord ( writer , null );
+            //processAndWriteRecord ( writer , null );
+            executorService.submit(() -> this.safeProcessAndWriteRecord ( writer , null ));
+
+            awaitTermination(executorService);
+        }
+    }
+
+    /**
+     * Helper method for terminating the executorService
+     * @param executorService
+     */
+    private void awaitTermination(final ExecutorService executorService) {
+        executorService.shutdown();
+        try {
+            if(!executorService.awaitTermination(10, TimeUnit.SECONDS)){
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException interruptedException) {
+            logger.error("Interrupt from thread pool termination ", interruptedException);
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    /**
+     * Helper method for handling exception from actual writing
+     * the processed data into the output file
+     * @param writer
+     * @param position
+     */
+    private void safeProcessAndWriteRecord ( final BufferedWriter writer , final Position position ) {
+        try {
+            processAndWriteRecord(writer, position);
+        } catch (IOException ioException) {
+            logger.error("Writing output ", ioException);
         }
     }
 

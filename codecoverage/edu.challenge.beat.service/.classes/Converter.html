@@ -55,34 +55,34 @@
 </td>
 </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$2141907363</td>
+    <td class="name">Converter$MockitoMock$302314971</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$2141907363$auxiliary$5cirndFO</td>
+    <td class="name">Converter$MockitoMock$302314971$auxiliary$5qJiJWi1</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$2141907363$auxiliary$8v3ztnNq</td>
+    <td class="name">Converter$MockitoMock$302314971$auxiliary$FsKxVAFo</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$2141907363$auxiliary$b567tdPr</td>
+    <td class="name">Converter$MockitoMock$302314971$auxiliary$GhD8HjOj</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$2141907363$auxiliary$jGfliHHf</td>
+    <td class="name">Converter$MockitoMock$302314971$auxiliary$MmXZdlZW</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$563499433</td>
+    <td class="name">Converter$MockitoMock$525050900</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$563499433$auxiliary$L7iPhm9t</td>
+    <td class="name">Converter$MockitoMock$525050900$auxiliary$nRKLBDR5</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$563499433$auxiliary$smwoImW1</td>
+    <td class="name">Converter$MockitoMock$525050900$auxiliary$uGrHNQBL</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$563499433$auxiliary$UzGyfBRx</td>
+    <td class="name">Converter$MockitoMock$525050900$auxiliary$uZLJdGfV</td>
   </tr>
   <tr>
-    <td class="name">Converter$MockitoMock$563499433$auxiliary$z5X87THe</td>
+    <td class="name">Converter$MockitoMock$525050900$auxiliary$yr0CkGhp</td>
   </tr>
 <tr>
   <td class="name"><strong>total</strong></td>
@@ -114,8 +114,8 @@
 <i>3</i>&nbsp;import edu.challenge.beat.model.Position;
 <i>4</i>&nbsp;import edu.challenge.beat.model.Ride;
 <i>5</i>&nbsp;import lombok.RequiredArgsConstructor;
-<i>6</i>&nbsp;import org.slf4j.Logger;
-<i>7</i>&nbsp;import org.slf4j.LoggerFactory;
+<i>6</i>&nbsp;import org.apache.logging.log4j.LogManager;
+<i>7</i>&nbsp;import org.apache.logging.log4j.Logger;
 <i>8</i>&nbsp;
 <i>9</i>&nbsp;/**
 <i>10</i>&nbsp; * Class converting the string record(from input file) into object
@@ -123,7 +123,7 @@
 <b class="fc"><i>12</i>&nbsp;@RequiredArgsConstructor</b>
 <i>13</i>&nbsp;public class Converter {
 <i>14</i>&nbsp;
-<b class="fc"><i>15</i>&nbsp;    private static Logger logger = LoggerFactory.getLogger(Converter.class);</b>
+<b class="fc"><i>15</i>&nbsp;    private static Logger logger = LogManager.getLogger(Converter.class);</b>
 <i>16</i>&nbsp;
 <i>17</i>&nbsp;    /**
 <i>18</i>&nbsp;     * Method to convert string record data into Position object
@@ -145,7 +145,7 @@
 <i>34</i>&nbsp;     * @return
 <i>35</i>&nbsp;     */
 <i>36</i>&nbsp;    public String convert(final Ride ride) {
-<b class="fc"><i>37</i>&nbsp;        return ride.getId() + &quot;,&quot; + ride.getFare ();</b>
+<b class="fc"><i>37</i>&nbsp;        return ride.getId() + &quot;, &quot; + ride.getFare ();</b>
 <i>38</i>&nbsp;    }
 <i>39</i>&nbsp;
 <i>40</i>&nbsp;}
@@ -154,7 +154,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-27 21:06</div>
+    <div style="float:right;">generated on 2020-09-28 01:06</div>
 </div>
 </body>
 </html>

@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Main class
@@ -23,7 +23,7 @@ public class BeatApplication {
     private static final Properties PROPERTIES = new Properties();
     private static final String APP_CONFIG_PATH = "config.properties";
 
-    private static Logger logger = LoggerFactory.getLogger(BeatApplication.class);
+    private static final Logger logger = LogManager.getLogger(BeatApplication.class);
 
     /**
      * @param args

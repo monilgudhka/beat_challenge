@@ -26,8 +26,8 @@ class BeatApplicationTest {
 
         List<String> data = Files.readAllLines(output);
         assertEquals( 2, data.size() );
-        assertEquals ( "1,10.3", data.get(0) );
-        assertEquals ( "2,7.96", data.get(1) );
+        assertEquals ( "1, 10.3", data.get(0) );
+        assertEquals ( "2, 7.96", data.get(1) );
     }
 
 }

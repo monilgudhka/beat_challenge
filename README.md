@@ -32,7 +32,7 @@
 
 
 # Limitations
-1. This program runs using only a single thread
+1. This program runs using only a single user thread and a java main thread
 2. All the values are bounded by the programming language constraints
 
 
@@ -51,17 +51,6 @@
 7. Repeat step 1
 
 
-# Todo
-1. Remove if-else and use design pattern as future requirements can change
-3. Make this multithreaded
-    3.1 either 1 reader thread and multiple consumer threads
-    3.2 Lmax disruptor
-7. Write detailed approach
-8. FareCalculator line 50 within for loop?
-9. test cases multiple places are hardcoded?
-11. read about haversine distance calculation formula
-
-
 # Benchmark Results
 - Single-Threaded Program
 - Machine details:
@@ -70,6 +59,7 @@
 - Results:
  1) Input file size 1.34GB
  2) Time taken 33 seconds
+
 
 # CodeCoverage Report
 - CodeCoverage report can be found under the 'codecoverage/index.html' folder
