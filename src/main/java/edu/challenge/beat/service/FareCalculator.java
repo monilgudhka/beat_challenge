@@ -56,6 +56,7 @@ public class FareCalculator {
                 source = destination;
             }
         }
+        //calculate total fare once all the positions are processed
         totalFare += ((int) idleTime * AppConstantsUtil.IDLE_TIME_PER_HOURLY_FARE);
 
         //Return fare with 2 decimal points
