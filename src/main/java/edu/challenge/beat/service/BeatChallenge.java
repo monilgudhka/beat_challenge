@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,19 +38,14 @@ public class BeatChallenge {
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
                 BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
         ) {
+            for (AtomicReference < String > record = new AtomicReference <> ( reader.readLine ( ) ); record.get ( ) != null; record.set ( reader.readLine ( ) )) {
 
-            for (String record = reader.readLine(); record != null; record = reader.readLine()) {
-                /**
-                 * Ignore empty records
-                 */
-                if ( StringUtil.checkTrimEmpty ( record )){
+                if ( StringUtil.checkTrimEmpty ( record.get ( ) )){
                     continue;
                 }
-                /**
-                 * Convert record into an object
-                 */
-                final Position position = converter.convert(record);
+                final Position position = converter.convert( record.get ( ) );
                 processAndWriteRecord ( writer , position );
+
             }
             /**
              * End of input check, that means last ride has been processed

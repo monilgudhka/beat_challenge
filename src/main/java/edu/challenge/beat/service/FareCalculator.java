@@ -35,13 +35,11 @@ public class FareCalculator {
         }
         double totalFare = AppConstantsUtil.INITIAL_FARE;
         double idleTime = 0;
-        /**
-         * Get the first record as a source point of the ride
-         */
+
+        //Get the first record as a source point of the ride
         Position source = positions.get(0);
-        /**
-         * Iterate over all the positions of a ride
-         */
+
+        //Iterate over all the positions of a ride
         for (int index = 1; index < positions.size(); index++) {
             final Position destination = positions.get(index);
 
@@ -59,9 +57,8 @@ public class FareCalculator {
             }
         }
         totalFare += ((int) idleTime * AppConstantsUtil.IDLE_TIME_PER_HOURLY_FARE);
-        /**
-         * Return fare with 2 decimal points
-         */
+
+        //Return fare with 2 decimal points
         return Double.parseDouble ( decimalFormat.format ( Math.max(totalFare, AppConstantsUtil.MIN_RIDE_FARE ) ));
     }
 
@@ -75,8 +72,11 @@ public class FareCalculator {
         final int hour = Instant.ofEpochSecond(timestamp)
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
+
         /**
          * Based on ride timings decide the fare
+         * If ride hour is between 5AM - 12PM then daytimeFare
+         * otherwise nighttimeFare
          */
         return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
                 ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance

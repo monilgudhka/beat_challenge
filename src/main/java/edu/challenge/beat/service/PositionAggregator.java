@@ -25,36 +25,27 @@ public class PositionAggregator {
      * @return
      */
     public Optional<Ride> aggregate(final Position position) {
-        /**
-         * End of input, last ride processed
-         */
+        //End of input, last ride processed
         if (Objects.isNull ( position )) {
             final Ride currentRide = ride;
             ride = null;
             return Optional.of(currentRide);
         }
-        /**
-         * For first ride
-         */
+        //For first ride
         if (Objects.isNull ( ride )) {
             ride = new Ride(position.getRideId());
         }
-        /**
-         * If ride is still on
-         */
+        //If ride is still on
         if (ride.getId() == position.getRideId()) {
             ride.getPositions().add(position);
-            /**
-             * As ride has not completed so returning empty optional
-             */
+
+            //As ride has not completed so returning empty optional
             return Optional.empty();
         } else {
             final Ride newRide = ride;
             ride = new Ride(position.getRideId());
             ride.getPositions().add(position);
-            /**
-             * Ride completed
-             */
+            //Ride completed signal
             return Optional.of(newRide);
         }
     }

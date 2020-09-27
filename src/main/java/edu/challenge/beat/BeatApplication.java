@@ -22,6 +22,7 @@ public class BeatApplication {
      */
     private static final Properties PROPERTIES = new Properties();
     private static final String APP_CONFIG_PATH = "config.properties";
+
     private static Logger logger = LoggerFactory.getLogger(BeatApplication.class);
 
     /**
