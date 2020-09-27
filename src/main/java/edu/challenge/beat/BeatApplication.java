@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Main class
@@ -20,6 +22,7 @@ public class BeatApplication {
      */
     private static final Properties PROPERTIES = new Properties();
     private static final String APP_CONFIG_PATH = "config.properties";
+    private static Logger logger = LoggerFactory.getLogger(BeatApplication.class);
 
     /**
      * @param args
@@ -50,7 +53,7 @@ public class BeatApplication {
         challenge.run(inputFile, outputFile);
 
         //long et = System.currentTimeMillis ();
-        //System.out.println("Time taken to run the task(in milliseconds)= "+ (et - st));
+        //logger.info ("Time taken to run the task(in milliseconds)= {} ",(et - st));
     }
 
 }

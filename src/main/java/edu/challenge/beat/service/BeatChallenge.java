@@ -3,8 +3,6 @@ package edu.challenge.beat.service;
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 import edu.challenge.beat.util.StringUtil;
-import lombok.RequiredArgsConstructor;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -12,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class reading the input file, send data for processing
@@ -24,6 +25,7 @@ public class BeatChallenge {
     private final Converter converter;
     private final PositionAggregator aggregator;
     private final FareCalculator fareCalculator;
+    private static Logger logger = LoggerFactory.getLogger(BeatChallenge.class);
 
     /**
      * @param inputFilePath

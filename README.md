@@ -59,9 +59,7 @@
 7. Write detailed approach
 8. FareCalculator line 50 within for loop?
 9. test cases multiple places are hardcoded?
-10. deploy on aws linux machine and get results
 11. read about haversine distance calculation formula
-12. add logger
 
 
 # Benchmark Results
