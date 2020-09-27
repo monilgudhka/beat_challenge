@@ -25,7 +25,7 @@ class ConverterTest {
     void covertMethodOverloadedPositiveScenarioTest_02 ( ) {
         Ride ride = new Ride(1);
         ride.setFare ( 3.47 );
-        String result = "1 , 3.47";
+        String result = "1,3.47";
         assertEquals ( result, converter.convert ( ride ));
     }
 

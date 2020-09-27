@@ -15,8 +15,8 @@ import java.util.List;
  */
 public class FareCalculator {
 
-    private static final int SecondToHourly = 3600;
-    private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    private final int SecondToHourly = 3600;
+    private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     /**
      * Method for calculating fare for each ride

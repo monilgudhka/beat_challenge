@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 public class BeatApplication {
 
-    static final private Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     public static void main(String[] args) throws IOException {
         long st = System.currentTimeMillis ();
