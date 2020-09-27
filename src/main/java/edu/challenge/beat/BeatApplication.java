@@ -15,31 +15,42 @@ import java.util.Properties;
  */
 public class BeatApplication {
 
-    private static final Properties properties = new Properties();
+    /**
+     * Fetch input and output file paths
+     */
+    private static final Properties PROPERTIES = new Properties();
+    private static final String APP_CONFIG_PATH = "config.properties";
 
-    public static void main(String[] args) throws IOException {
-        long st = System.currentTimeMillis ();
+    /**
+     * @param args
+     * @throws IOException
+     */
+    public static void main(final String[] args) throws IOException {
+        //long st = System.currentTimeMillis ();
 
-        //fetch input and output file names
-        String appConfigPath = "config.properties";
-        InputStream inputStream = Thread.currentThread ().getContextClassLoader ().getResourceAsStream ( appConfigPath );
-        properties.load(inputStream);
+        try(InputStream inputStream = Thread.currentThread ()
+                .getContextClassLoader ().getResourceAsStream ( APP_CONFIG_PATH )) {
+            PROPERTIES.load ( inputStream );
+        }
 
-        //read the file paths
-        Path inputFile = Paths.get(properties.getProperty ( "inputFilePath" ));
-        Path outputFile = Paths.get(properties.getProperty ( "outputFilePath" ));
+        /**
+         * Read the file paths
+         */
+        final Path inputFile = Paths.get( PROPERTIES.getProperty ( "inputFilePath" ));
+        final Path outputFile = Paths.get( PROPERTIES.getProperty ( "outputFilePath" ));
 
-        //main task logic
-        Converter converter = new Converter();
-        PositionAggregator aggregator = new PositionAggregator();
-        FareCalculator fareCalculator = new FareCalculator();
+        /**
+         * Main task logic
+         */
+        final Converter converter = new Converter();
+        final PositionAggregator aggregator = new PositionAggregator();
+        final FareCalculator fareCalculator = new FareCalculator();
 
-        BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);
+        final BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);
         challenge.run(inputFile, outputFile);
 
-
-        long et = System.currentTimeMillis ();
-        System.out.println("Time taken to run the task(in milliseconds)= "+ (et - st));
+        //long et = System.currentTimeMillis ();
+        //System.out.println("Time taken to run the task(in milliseconds)= "+ (et - st));
     }
 
 }

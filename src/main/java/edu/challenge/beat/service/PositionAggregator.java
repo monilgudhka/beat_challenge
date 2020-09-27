@@ -4,42 +4,55 @@ import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Class aggregating the individual ride positions
  */
+@RequiredArgsConstructor
 public class PositionAggregator {
-
-    private Ride ride;
+    /**
+     * Ride instance used for creating individual ride objects
+     */
+    private static Ride ride;
 
     /**
      * Method for creating Ride and List of Positions of the ride
      * @param position
      * @return
      */
-    public Optional<Ride> aggregate(Position position) {
-        //end of input, last ride processed
+    public Optional<Ride> aggregate(final Position position) {
+        /**
+         * End of input, last ride processed
+         */
         if (Objects.isNull ( position )) {
-            Ride currentRide = ride;
+            final Ride currentRide = ride;
             ride = null;
             return Optional.of(currentRide);
         }
-        //first ride
+        /**
+         * For first ride
+         */
         if (Objects.isNull ( ride )) {
             ride = new Ride(position.getRideId());
         }
-        //ride is still not done
+        /**
+         * If ride is still on
+         */
         if (ride.getId() == position.getRideId()) {
             ride.getPositions().add(position);
-            //as ride has not completed so returning empty optional
+            /**
+             * As ride has not completed so returning empty optional
+             */
             return Optional.empty();
         } else {
-            Ride newRide = ride;
+            final Ride newRide = ride;
             ride = new Ride(position.getRideId());
             ride.getPositions().add(position);
-            //ride completed
+            /**
+             * Ride completed
+             */
             return Optional.of(newRide);
         }
     }
-
 }

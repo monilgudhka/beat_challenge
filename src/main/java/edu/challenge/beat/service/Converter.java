@@ -2,10 +2,12 @@ package edu.challenge.beat.service;
 
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
+import lombok.RequiredArgsConstructor;
 
 /**
  * Class converting the string record(from input file) into object
  */
+@RequiredArgsConstructor
 public class Converter {
 
     /**
@@ -13,12 +15,12 @@ public class Converter {
      * @param record
      * @return
      */
-    public Position convert(String record) {
-        String[] data = record.split(",");
-        int rideId = Integer.parseInt(data[0]);
-        double latitude = Double.parseDouble(data[1]);
-        double longitude = Double.parseDouble(data[2]);
-        long timestamp = Long.parseLong(data[3]);
+    public Position convert(final String record) {
+        final String[] data = record.split(",");
+        final int rideId = Integer.parseInt(data[0]);
+        final double latitude = Double.parseDouble(data[1]);
+        final double longitude = Double.parseDouble(data[2]);
+        final long timestamp = Long.parseLong(data[3]);
         return new Position(rideId, latitude, longitude, timestamp);
     }
 
@@ -27,7 +29,7 @@ public class Converter {
      * @param ride
      * @return
      */
-    public String convert(Ride ride) {
+    public String convert(final Ride ride) {
         return ride.getId() + "," + ride.getFare ();
     }
 

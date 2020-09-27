@@ -2,6 +2,7 @@ package edu.challenge.beat.service;
 
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
+import edu.challenge.beat.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 
 import java.io.BufferedReader;
@@ -13,7 +14,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 
 /**
- * Class reading the input file, send data for processing and write the required output data
+ * Class reading the input file, send data for processing
+ * and write the required output data
  * into the output.txt file
  */
 @RequiredArgsConstructor
@@ -28,23 +30,28 @@ public class BeatChallenge {
      * @param outputFilePath
      * @throws IOException
      */
-    public void run(Path inputFilePath, Path outputFilePath) throws IOException {
+    public void run(final Path inputFilePath, final Path outputFilePath) throws IOException {
         try (
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
                 BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
         ) {
 
-            String record;
-            while ((record = reader.readLine()) != null) {
-                //ignore empty records
-                if (record.trim().isEmpty ()){
+            for (String record = reader.readLine(); record != null; record = reader.readLine()) {
+                /**
+                 * Ignore empty records
+                 */
+                if ( StringUtil.checkTrimEmpty ( record )){
                     continue;
                 }
-                //convert record into an object
-                Position position = converter.convert(record);
+                /**
+                 * Convert record into an object
+                 */
+                final Position position = converter.convert(record);
                 processAndWriteRecord ( writer , position );
             }
-            //end of input check, that means last ride has been processed
+            /**
+             * End of input check, that means last ride has been processed
+             */
             processAndWriteRecord ( writer , null );
         }
     }
@@ -55,10 +62,10 @@ public class BeatChallenge {
      * @param position
      * @throws IOException
      */
-    private void processAndWriteRecord ( BufferedWriter writer , Position position ) throws IOException {
-        Optional < String > optionalOutput = process ( position );
+    private void processAndWriteRecord ( final BufferedWriter writer , final Position position ) throws IOException {
+        final Optional < String > optionalOutput = process ( position );
         if ( optionalOutput.isPresent ( ) ) {
-            String outputData = optionalOutput.get ( );
+            final String outputData = optionalOutput.get ( );
             writer.write ( outputData );
             writer.newLine ( );
         }
@@ -69,10 +76,15 @@ public class BeatChallenge {
      * @param position
      * @return
      */
-    private Optional<String> process(Position position) {
+    private Optional<String> process(final Position position) {
+        /**
+         * once all the records of a ride are read then proceed with fare calculation
+         * and finally ride object to string conversion is done
+         * for writing into the output file
+         */
         return aggregator.aggregate(position)
-                .map(this::calculateFare) //once all the records of a ride are read then proceed with fare calculation
-                .map(converter::convert); //ride object to string conversion to write into the output file
+                .map(this::calculateFare)
+                .map(converter::convert);
     }
 
     /**
@@ -80,8 +92,8 @@ public class BeatChallenge {
      * @param ride
      * @return
      */
-    private Ride calculateFare(Ride ride) {
-        double fare = fareCalculator.calculate(ride);
+    private Ride calculateFare(final Ride ride) {
+        final double fare = fareCalculator.calculate(ride);
         ride.setFare(fare);
         return ride;
     }
