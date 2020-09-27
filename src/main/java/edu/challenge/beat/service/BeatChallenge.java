@@ -71,15 +71,13 @@ public class BeatChallenge {
 
     /**
      * Helper Method for aggregating the ride data and calculate fare
+     * once all the records of a ride are read then proceed with fare calculation
+     * and finally ride object to string conversion is done
+     * for writing into the output file
      * @param position
      * @return
      */
     private Optional<String> process(final Position position) {
-        /**
-         * once all the records of a ride are read then proceed with fare calculation
-         * and finally ride object to string conversion is done
-         * for writing into the output file
-         */
         return aggregator.aggregate(position)
                 .map(this::calculateFare)
                 .map(converter::convert);
