@@ -87,7 +87,7 @@ public class BeatChallenge {
         try {
             processAndWriteRecord(writer, position);
         } catch (IOException ioException) {
-            logger.error("Writing output ", ioException);
+            logger.error("Exception while writing output ", ioException);
         }
     }
 

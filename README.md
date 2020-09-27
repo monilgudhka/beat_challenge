@@ -6,6 +6,7 @@
 3. No partial tuple
 4. Ride fare is calculated at the end of the ride only, there is no intermediate stage
 5. Input file records are comma-separated
+6. Input is from single file and output needs to be in single file
 
 # Installation and Setup
 - This is a Java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
@@ -38,7 +39,7 @@
 
 # Features Needed
 1. More parallelization to speed up the processing time
-
+2. With more time and resources?
 
 # Design Approach
 1. Scan tuples serially
@@ -48,7 +49,7 @@
 4. Filter the tuple if calculated speed > 100 km/hr
 5. Calculate current fare
 6. Store the results
-7. Repeat step 1
+- Please see Ride Fare Estimation.png
 
 
 # Benchmark Results
