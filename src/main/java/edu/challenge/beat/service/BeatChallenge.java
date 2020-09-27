@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,13 +41,13 @@ public class BeatChallenge {
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
                 BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
         ) {
-            for (AtomicReference < String > record = new AtomicReference <> ( reader.readLine ( ) );
-                 record.get ( ) != null; record.set ( reader.readLine ( ) )) {
+            for (String record = reader.readLine ( ) ;
+                 record != null; record = reader.readLine ( ) ) {
 
-                if ( StringUtil.checkTrimEmpty ( record.get ( ) )){
+                if ( StringUtil.checkTrimEmpty ( record )) {
                     continue;
                 }
-                final Position position = converter.convert( record.get ( ) );
+                final Position position = converter.convert( record );
                 //processAndWriteRecord ( writer , position );
                 executorService.submit(() -> this.safeProcessAndWriteRecord ( writer , position ));
             }
