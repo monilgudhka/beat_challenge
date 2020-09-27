@@ -65,14 +65,11 @@
 # Benchmark Results
 - Single-Threaded Program
 - Machine details:
- 1) 16 GB RAM 1600 MHz DDR3
- 2) 250 GB HDD
- 3) 2.2GHz Quad-Core Intel i7 CPU
- 4) Mac OS Catalina
+  - t3.medium
 
 - Results:
  1) Input file size 1.34GB
- 2) Time taken 30 seconds
+ 2) Time taken 33 seconds
 
 # CodeCoverage Report
 - CodeCoverage report can be found under the 'codecoverage/index.html' folder
