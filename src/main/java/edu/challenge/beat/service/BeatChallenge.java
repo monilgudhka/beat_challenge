@@ -10,6 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -34,6 +37,7 @@ public class BeatChallenge {
      * @throws IOException
      */
     public void run(final Path inputFilePath, final Path outputFilePath) throws IOException {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
         try (
                 BufferedReader reader = Files.newBufferedReader(inputFilePath);
                 BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)
@@ -44,13 +48,39 @@ public class BeatChallenge {
                     continue;
                 }
                 final Position position = converter.convert( record.get ( ) );
-                processAndWriteRecord ( writer , position );
+                executorService.submit(() -> this.safeProcessAndWriteRecord ( writer , position ));
 
             }
             /**
              * End of input check, that means last ride has been processed
              */
-            processAndWriteRecord ( writer , null );
+            executorService.submit(() -> this.safeProcessAndWriteRecord ( writer , null ));
+
+            awaitTermination(executorService);
+        }
+    }
+
+    private void awaitTermination(ExecutorService executorService) {
+        executorService.shutdown();
+        try {
+            if(!executorService.awaitTermination(60, TimeUnit.SECONDS)){
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            logger.error("interrupt from thread pool termination", e);
+        }
+    }
+
+    /**
+     * Helper method for handling exception from actual writing the processed data into the output file
+     * @param writer
+     * @param position
+     */
+    private void safeProcessAndWriteRecord ( final BufferedWriter writer , final Position position ) {
+        try {
+            processAndWriteRecord(writer, position);
+        } catch (IOException e) {
+            logger.error("writing output", e);
         }
     }
 
