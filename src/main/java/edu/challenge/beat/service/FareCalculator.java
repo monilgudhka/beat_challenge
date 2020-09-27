@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class FareCalculator {
 
     private static final int SECOND_TO_HOURLY = 3600;
-    private transient final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    private static final DecimalFormat decimalFormat = new DecimalFormat("#.##");
     private static Logger logger = LoggerFactory.getLogger(FareCalculator.class);
 
     /**

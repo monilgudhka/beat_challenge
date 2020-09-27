@@ -30,7 +30,7 @@ public class BeatApplication {
      * @throws IOException
      */
     public static void main(final String[] args) throws IOException {
-        //long st = System.currentTimeMillis ();
+        long st = System.currentTimeMillis ();
 
         try(InputStream inputStream = Thread.currentThread ()
                 .getContextClassLoader ().getResourceAsStream ( APP_CONFIG_PATH )) {
@@ -53,8 +53,8 @@ public class BeatApplication {
         final BeatChallenge challenge = new BeatChallenge(converter, aggregator, fareCalculator);
         challenge.run(inputFile, outputFile);
 
-        //long et = System.currentTimeMillis ();
-        //logger.info ("Time taken to run the task(in milliseconds)= {} ",(et - st));
+        long et = System.currentTimeMillis ();
+        logger.info ("Time taken to run the task(in milliseconds)= {} ",(et - st));
     }
 
 }

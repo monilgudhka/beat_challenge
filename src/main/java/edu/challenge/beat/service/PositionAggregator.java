@@ -16,7 +16,7 @@ public class PositionAggregator {
     /**
      * Ride instance used for creating individual ride objects
      */
-    private static Ride ride;
+    private Ride ride;
     private static Logger logger = LoggerFactory.getLogger(PositionAggregator.class);
 
     /**
