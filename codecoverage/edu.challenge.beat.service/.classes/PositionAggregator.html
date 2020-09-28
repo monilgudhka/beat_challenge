@@ -55,28 +55,16 @@
 </td>
 </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$299815250</td>
+    <td class="name">PositionAggregator$MockitoMock$2049647448</td>
   </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$299815250$auxiliary$3q6vDDa0</td>
+    <td class="name">PositionAggregator$MockitoMock$2049647448$auxiliary$09gMmtuk</td>
   </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$299815250$auxiliary$6FMb8CHK</td>
+    <td class="name">PositionAggregator$MockitoMock$2049647448$auxiliary$gzkO5Z1D</td>
   </tr>
   <tr>
-    <td class="name">PositionAggregator$MockitoMock$299815250$auxiliary$QH4Kdat3</td>
-  </tr>
-  <tr>
-    <td class="name">PositionAggregator$MockitoMock$358000410</td>
-  </tr>
-  <tr>
-    <td class="name">PositionAggregator$MockitoMock$358000410$auxiliary$08A9WmJR</td>
-  </tr>
-  <tr>
-    <td class="name">PositionAggregator$MockitoMock$358000410$auxiliary$BRuklxnR</td>
-  </tr>
-  <tr>
-    <td class="name">PositionAggregator$MockitoMock$358000410$auxiliary$xHvbRNc4</td>
+    <td class="name">PositionAggregator$MockitoMock$2049647448$auxiliary$jZY9GXKj</td>
   </tr>
 <tr>
   <td class="name"><strong>total</strong></td>
@@ -130,13 +118,13 @@
 <i>25</i>&nbsp;     * @return
 <i>26</i>&nbsp;     */
 <i>27</i>&nbsp;    public Optional&lt;Ride&gt; aggregate(final Position position) {
-<i>28</i>&nbsp;        //End of input, last ride processed
+<i>28</i>&nbsp;        // End of input, last ride processed
 <b class="fc"><i>29</i>&nbsp;        if (Objects.isNull ( position )) {</b>
 <b class="fc"><i>30</i>&nbsp;            final Ride currentRide = ride;</b>
 <b class="fc"><i>31</i>&nbsp;            ride = null;</b>
 <b class="fc"><i>32</i>&nbsp;            return Optional.of(currentRide);</b>
 <i>33</i>&nbsp;        }
-<i>34</i>&nbsp;        //For first ride
+<i>34</i>&nbsp;        // For first ride
 <b class="fc"><i>35</i>&nbsp;        if (Objects.isNull ( ride )) {</b>
 <b class="fc"><i>36</i>&nbsp;            ride = new Ride(position.getRideId());</b>
 <i>37</i>&nbsp;        }
@@ -160,7 +148,7 @@
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-28 18:59</div>
+    <div style="float:right;">generated on 2020-09-28 22:11</div>
 </div>
 </body>
 </html>

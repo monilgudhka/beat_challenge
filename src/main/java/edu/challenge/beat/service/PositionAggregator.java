@@ -25,13 +25,13 @@ public class PositionAggregator {
      * @return
      */
     public Optional<Ride> aggregate(final Position position) {
-        //End of input, last ride processed
+        // End of input, last ride processed
         if (Objects.isNull ( position )) {
             final Ride currentRide = ride;
             ride = null;
             return Optional.of(currentRide);
         }
-        //For first ride
+        // For first ride
         if (Objects.isNull ( ride )) {
             ride = new Ride(position.getRideId());
         }
