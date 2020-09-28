@@ -80,15 +80,9 @@ public class FareCalculator {
          * otherwise nighttimeFare
          */
         logger.debug ( "hour={} distance={} ts={}",hour,distance, timestamp );
-        if(AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR){
-            return AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance;
-        }else{
-            return AppConstantsUtil.DAY_TIME_PER_KM_FARE * distance;
-        }
-
-//        return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
-//                ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance
-//                : AppConstantsUtil.DAY_TIME_PER_KM_FARE * distance;
+        return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
+                ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance
+                : AppConstantsUtil.DAY_TIME_PER_KM_FARE * distance;
     }
 
     /**
