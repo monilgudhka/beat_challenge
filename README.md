@@ -25,6 +25,7 @@
 1. Plugins to Install: Maven Helper, Sonarlint, Lombok, Coverage
 2. Setup project JDK to 1.8
 3. Run BeatApplication.java file
+4. If this does not work , then mark the 'main' folder as 'Sources Root' and 'test' folder as 'Test Source Root'...then try to run
 
 
 - Run BeatApplication file through terminal on Linux(CentOS)::
