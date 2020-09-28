@@ -91,7 +91,7 @@ class FareCalculatorTest {
         Ride ride = Mockito.mock ( Ride.class );
         when(ride.getPositions ()).thenReturn(positionList);
 
-        assertEquals(179.28,fareCalculator.calculate ( ride ));
+        assertEquals(186.25,fareCalculator.calculate ( ride ));
     }
 
     @Test
@@ -133,6 +133,38 @@ class FareCalculatorTest {
         Ride ride = Mockito.mock ( Ride.class );
         when(ride.getPositions ()).thenReturn(positionList);
 
-        assertEquals(286.64,fareCalculator.calculate ( ride ));
+        assertEquals(298.34,fareCalculator.calculate ( ride ));
+    }
+
+    @Test
+    void calculateMethod_ExactOneourIdealFareCalculation_Test_08 ( ) {
+        Position position1 = new Position ( 1,37.913403,23.721222,1601165427 );
+        Position position2 = new Position ( 1,37.913403,23.721222,1601169000 );
+
+        List <Position> positionList = new ArrayList<>();
+        positionList.add(position1);
+        positionList.add(position2);
+
+        Ride ride = Mockito.mock ( Ride.class );
+        when(ride.getPositions ()).thenReturn(positionList);
+
+        assertEquals(13.11,fareCalculator.calculate ( ride ));
+    }
+
+    @Test
+    void calculateMethod_EndRideAtIdleFareCalculation_Test_09 ( ) {
+        Position position0 = new Position ( 1,37,23,1601205000 );
+        Position position1 = new Position ( 1,37.11,22.91,1601208600 );
+        Position position2 = new Position ( 1,37.11,22.91,1601212200 );
+
+        List <Position> positionList = new ArrayList<>();
+        positionList.add(position0);
+        positionList.add(position1);
+        positionList.add(position2);
+
+        Ride ride = Mockito.mock ( Ride.class );
+        when(ride.getPositions ()).thenReturn(positionList);
+
+        assertEquals(24.01,fareCalculator.calculate ( ride ));
     }
 }

@@ -55,7 +55,7 @@ public class BeatApplication {
         challenge.run(inputFile, outputFile);
 
         long et = System.currentTimeMillis ();
-        logger.info ("Time taken to run the task(in milliseconds)= {} ",(et - st));
+        logger.info ("Execution ended! \n Time taken to run the task(in milliseconds)= {} ",(et - st));
     }
 
 }

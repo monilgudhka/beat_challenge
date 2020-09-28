@@ -7,6 +7,7 @@
 4. Ride fare is calculated at the end of the ride only, there is no intermediate stage
 5. Input file records are comma-separated
 6. Input is from single file and output needs to be in single file
+7. Ideal time calcuation is considerd with minutes as well
 
 # Installation and Setup
 - This is a Java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
@@ -15,7 +16,7 @@
 - Run BeatApplication through terminal::
 1. Move to the directory where pom.xml exists
 2. Build jar using the command "mvn clean install"
-3. Once the jar is built run from the terminal using the below command
+3. Once the jar is built, run from the terminal using the below command:
 4. java -cp target/beat-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.challenge.beat.BeatApplication
 5. Once the execution is successful then you should see the output in the "output.txt" file under the resources folder of the project
 
@@ -39,7 +40,9 @@
 
 # Features Needed
 1. More parallelization to speed up the processing time
-2. With more time and resources?
+2. BlockingQueue approach or distruptor approach would have been possible with more time.
+3. More verbose unit testing
+
 
 # Design Approach
 1. Scan tuples serially
@@ -49,7 +52,7 @@
 4. Filter the tuple if calculated speed > 100 km/hr
 5. Calculate current fare
 6. Store the results
-- Please see Ride Fare Estimation.png
+- Please see 'Ride Fare Estimation.png'
 
 
 # Benchmark Results

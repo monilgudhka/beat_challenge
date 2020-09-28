@@ -49,7 +49,9 @@ public class FareCalculator {
             final double time = calcTimeInHours(source, destination);
             final double speed = calcSpeed(distance, time);
 
-            if (speed < AppConstantsUtil.MIN_SPEED ) {
+            logger.debug("Distance={} Time={} Speed={}",distance,time,speed);
+
+            if (speed <= AppConstantsUtil.MIN_SPEED ) {
                 idleTime += time;
                 source = destination;
             } else if (speed <= AppConstantsUtil.MAX_SPEED ) {
@@ -59,7 +61,7 @@ public class FareCalculator {
             }
         }
         //calculate total fare once all the positions are processed
-        totalFare += ((int) idleTime * AppConstantsUtil.IDLE_TIME_PER_HOURLY_FARE);
+        totalFare += (idleTime * AppConstantsUtil.IDLE_TIME_PER_HOURLY_FARE);
 
         //Return fare with 2 decimal points
         return Double.parseDouble ( decimalFormat.format ( Math.max(totalFare, AppConstantsUtil.MIN_RIDE_FARE ) ));
