@@ -58,10 +58,10 @@
 </td>
 <td class="coverageStat">
   <span class="percent">
-    87.5%
+    85.4%
   </span>
   <span class="absValue">
-    (35/ 40)
+    (35/ 41)
   </span>
 </td>
 </tr>
@@ -87,126 +87,131 @@
 <i>13</i>&nbsp;import java.util.concurrent.ExecutorService;
 <i>14</i>&nbsp;import java.util.concurrent.Executors;
 <i>15</i>&nbsp;import java.util.concurrent.TimeUnit;
-<i>16</i>&nbsp;import java.util.concurrent.atomic.AtomicReference;
-<i>17</i>&nbsp;import lombok.RequiredArgsConstructor;
-<i>18</i>&nbsp;import org.apache.logging.log4j.LogManager;
-<i>19</i>&nbsp;import org.apache.logging.log4j.Logger;
-<i>20</i>&nbsp;
-<i>21</i>&nbsp;/**
-<i>22</i>&nbsp; * Class reading the input file, send data for processing
-<i>23</i>&nbsp; * and write the required output data
-<i>24</i>&nbsp; * into the output.txt file
-<i>25</i>&nbsp; */
-<b class="fc"><i>26</i>&nbsp;@RequiredArgsConstructor</b>
-<i>27</i>&nbsp;public class BeatChallenge {
-<i>28</i>&nbsp;
-<i>29</i>&nbsp;    private final Converter converter;
-<i>30</i>&nbsp;    private final PositionAggregator aggregator;
-<i>31</i>&nbsp;    private final FareCalculator fareCalculator;
-<b class="fc"><i>32</i>&nbsp;    private static Logger logger = LogManager.getLogger( BeatChallenge.class );</b>
-<i>33</i>&nbsp;
-<i>34</i>&nbsp;    /**
-<i>35</i>&nbsp;     * @param inputFilePath
-<i>36</i>&nbsp;     * @param outputFilePath
-<i>37</i>&nbsp;     * @throws IOException
-<i>38</i>&nbsp;     */
-<i>39</i>&nbsp;    public void run(final Path inputFilePath, final Path outputFilePath) throws IOException {
-<b class="fc"><i>40</i>&nbsp;        ExecutorService executorService = Executors.newSingleThreadExecutor();</b>
-<b class="fc"><i>41</i>&nbsp;        try (</b>
-<b class="fc"><i>42</i>&nbsp;                BufferedReader reader = Files.newBufferedReader(inputFilePath);</b>
-<b class="fc"><i>43</i>&nbsp;                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)</b>
-<i>44</i>&nbsp;        ) {
-<b class="fc"><i>45</i>&nbsp;            for (AtomicReference &lt; String &gt; record = new AtomicReference &lt;&gt; ( reader.readLine ( ) );</b>
-<b class="fc"><i>46</i>&nbsp;                 record.get ( ) != null; record.set ( reader.readLine ( ) )) {</b>
-<i>47</i>&nbsp;
-<b class="fc"><i>48</i>&nbsp;                if ( StringUtil.checkTrimEmpty ( record.get ( ) )){</b>
-<b class="fc"><i>49</i>&nbsp;                    continue;</b>
-<i>50</i>&nbsp;                }
-<b class="fc"><i>51</i>&nbsp;                final Position position = converter.convert( record.get ( ) );</b>
-<i>52</i>&nbsp;                //processAndWriteRecord ( writer , position );
-<b class="fc"><i>53</i>&nbsp;                executorService.submit(() -&gt; this.safeProcessAndWriteRecord ( writer , position ));</b>
-<i>54</i>&nbsp;            }
-<i>55</i>&nbsp;            /**
-<i>56</i>&nbsp;             * End of input check, that means last ride has been processed
-<i>57</i>&nbsp;             */
-<i>58</i>&nbsp;            //processAndWriteRecord ( writer , null );
-<b class="fc"><i>59</i>&nbsp;            executorService.submit(() -&gt; this.safeProcessAndWriteRecord ( writer , null ));</b>
-<i>60</i>&nbsp;
-<b class="fc"><i>61</i>&nbsp;            awaitTermination(executorService);</b>
-<b class="fc"><i>62</i>&nbsp;        }</b>
-<b class="fc"><i>63</i>&nbsp;    }</b>
-<i>64</i>&nbsp;
-<i>65</i>&nbsp;    private void awaitTermination(ExecutorService executorService) {
-<b class="fc"><i>66</i>&nbsp;        executorService.shutdown();</b>
-<i>67</i>&nbsp;        try {
-<b class="fc"><i>68</i>&nbsp;            if(!executorService.awaitTermination(10, TimeUnit.SECONDS)){</b>
-<b class="nc"><i>69</i>&nbsp;                executorService.shutdownNow();</b>
-<i>70</i>&nbsp;            }
-<b class="nc"><i>71</i>&nbsp;        } catch (InterruptedException interruptedException) {</b>
-<b class="nc"><i>72</i>&nbsp;            logger.error(&quot;Interrupt from thread pool termination &quot;, interruptedException);</b>
-<b class="fc"><i>73</i>&nbsp;        }</b>
-<b class="fc"><i>74</i>&nbsp;    }</b>
-<i>75</i>&nbsp;
-<i>76</i>&nbsp;    /**
-<i>77</i>&nbsp;     * Helper method for handling exception from actual writing the processed data into the output file
-<i>78</i>&nbsp;     * @param writer
-<i>79</i>&nbsp;     * @param position
-<i>80</i>&nbsp;     */
-<i>81</i>&nbsp;    private void safeProcessAndWriteRecord ( final BufferedWriter writer , final Position position ) {
-<i>82</i>&nbsp;        try {
-<b class="fc"><i>83</i>&nbsp;            processAndWriteRecord(writer, position);</b>
-<b class="nc"><i>84</i>&nbsp;        } catch (IOException ioException) {</b>
-<b class="nc"><i>85</i>&nbsp;            logger.error(&quot;Writing output &quot;, ioException);</b>
-<b class="fc"><i>86</i>&nbsp;        }</b>
-<b class="fc"><i>87</i>&nbsp;    }</b>
-<i>88</i>&nbsp;
-<i>89</i>&nbsp;    /**
-<i>90</i>&nbsp;     * Helper method for writing the processed data into the output file
-<i>91</i>&nbsp;     * @param writer
-<i>92</i>&nbsp;     * @param position
-<i>93</i>&nbsp;     * @throws IOException
-<i>94</i>&nbsp;     */
-<i>95</i>&nbsp;    private void processAndWriteRecord ( final BufferedWriter writer , final Position position ) throws IOException {
-<b class="fc"><i>96</i>&nbsp;        final Optional &lt; String &gt; optionalOutput = process ( position );</b>
-<b class="fc"><i>97</i>&nbsp;        if ( optionalOutput.isPresent ( ) ) {</b>
-<b class="fc"><i>98</i>&nbsp;            final String outputData = optionalOutput.get ( );</b>
-<b class="fc"><i>99</i>&nbsp;            writer.write ( outputData );</b>
-<b class="fc"><i>100</i>&nbsp;            writer.newLine ( );</b>
-<i>101</i>&nbsp;        }
-<b class="fc"><i>102</i>&nbsp;    }</b>
-<i>103</i>&nbsp;
-<i>104</i>&nbsp;    /**
-<i>105</i>&nbsp;     * Helper Method for aggregating the ride data and calculate fare
-<i>106</i>&nbsp;     * once all the records of a ride are read then proceed with fare calculation
-<i>107</i>&nbsp;     * and finally ride object to string conversion is done
-<i>108</i>&nbsp;     * for writing into the output file
-<i>109</i>&nbsp;     * @param position
-<i>110</i>&nbsp;     * @return
-<i>111</i>&nbsp;     */
-<i>112</i>&nbsp;    private Optional&lt;String&gt; process(final Position position) {
-<b class="fc"><i>113</i>&nbsp;        return aggregator.aggregate(position)</b>
-<b class="fc"><i>114</i>&nbsp;                .map(this::calculateFare)</b>
-<b class="fc"><i>115</i>&nbsp;                .map(converter::convert);</b>
-<i>116</i>&nbsp;    }
-<i>117</i>&nbsp;
-<i>118</i>&nbsp;    /**
-<i>119</i>&nbsp;     * Helper Method for calculating the individual ride fare
-<i>120</i>&nbsp;     * @param ride
-<i>121</i>&nbsp;     * @return
-<i>122</i>&nbsp;     */
-<i>123</i>&nbsp;    private Ride calculateFare(final Ride ride) {
-<b class="fc"><i>124</i>&nbsp;        final double fare = fareCalculator.calculate(ride);</b>
-<b class="fc"><i>125</i>&nbsp;        ride.setFare(fare);</b>
-<b class="fc"><i>126</i>&nbsp;        return ride;</b>
-<i>127</i>&nbsp;    }
-<i>128</i>&nbsp;
-<i>129</i>&nbsp;}
+<i>16</i>&nbsp;import lombok.RequiredArgsConstructor;
+<i>17</i>&nbsp;import org.apache.logging.log4j.LogManager;
+<i>18</i>&nbsp;import org.apache.logging.log4j.Logger;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;/**
+<i>21</i>&nbsp; * Class reading the input file, send data for processing
+<i>22</i>&nbsp; * and write the required output data
+<i>23</i>&nbsp; * into the output.txt file
+<i>24</i>&nbsp; */
+<b class="fc"><i>25</i>&nbsp;@RequiredArgsConstructor</b>
+<i>26</i>&nbsp;public class BeatChallenge {
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    private final Converter converter;
+<i>29</i>&nbsp;    private final PositionAggregator aggregator;
+<i>30</i>&nbsp;    private final FareCalculator fareCalculator;
+<b class="fc"><i>31</i>&nbsp;    private static final Logger logger = LogManager.getLogger( BeatChallenge.class );</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * @param inputFilePath
+<i>35</i>&nbsp;     * @param outputFilePath
+<i>36</i>&nbsp;     * @throws IOException
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    public void run(final Path inputFilePath, final Path outputFilePath) throws IOException {
+<b class="fc"><i>39</i>&nbsp;        ExecutorService executorService = Executors.newSingleThreadExecutor();</b>
+<b class="fc"><i>40</i>&nbsp;        try (</b>
+<b class="fc"><i>41</i>&nbsp;                BufferedReader reader = Files.newBufferedReader(inputFilePath);</b>
+<b class="fc"><i>42</i>&nbsp;                BufferedWriter writer = Files.newBufferedWriter(outputFilePath, StandardOpenOption.CREATE)</b>
+<i>43</i>&nbsp;        ) {
+<b class="fc"><i>44</i>&nbsp;            for (String record = reader.readLine ( ) ;</b>
+<b class="fc"><i>45</i>&nbsp;                 record != null; record = reader.readLine ( ) ) {</b>
+<i>46</i>&nbsp;
+<b class="fc"><i>47</i>&nbsp;                if ( StringUtil.checkTrimEmpty ( record )) {</b>
+<b class="fc"><i>48</i>&nbsp;                    continue;</b>
+<i>49</i>&nbsp;                }
+<b class="fc"><i>50</i>&nbsp;                final Position position = converter.convert( record );</b>
+<i>51</i>&nbsp;                //processAndWriteRecord ( writer , position );
+<b class="fc"><i>52</i>&nbsp;                executorService.submit(() -&gt; this.safeProcessAndWriteRecord ( writer , position ));</b>
+<i>53</i>&nbsp;            }
+<i>54</i>&nbsp;            /**
+<i>55</i>&nbsp;             * End of input check, that means last ride has been processed
+<i>56</i>&nbsp;             */
+<i>57</i>&nbsp;            //processAndWriteRecord ( writer , null );
+<b class="fc"><i>58</i>&nbsp;            executorService.submit(() -&gt; this.safeProcessAndWriteRecord ( writer , null ));</b>
+<i>59</i>&nbsp;
+<b class="fc"><i>60</i>&nbsp;            awaitTermination(executorService);</b>
+<b class="fc"><i>61</i>&nbsp;        }</b>
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * Helper method for terminating the executorService
+<i>66</i>&nbsp;     * @param executorService
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    private void awaitTermination(final ExecutorService executorService) {
+<b class="fc"><i>69</i>&nbsp;        executorService.shutdown();</b>
+<i>70</i>&nbsp;        try {
+<b class="fc"><i>71</i>&nbsp;            if(!executorService.awaitTermination(10, TimeUnit.SECONDS)){</b>
+<b class="nc"><i>72</i>&nbsp;                executorService.shutdownNow();</b>
+<i>73</i>&nbsp;            }
+<b class="nc"><i>74</i>&nbsp;        } catch (InterruptedException interruptedException) {</b>
+<b class="nc"><i>75</i>&nbsp;            logger.error(&quot;Interrupt from thread pool termination &quot;, interruptedException);</b>
+<b class="nc"><i>76</i>&nbsp;            Thread.currentThread().interrupt();</b>
+<b class="fc"><i>77</i>&nbsp;        }</b>
+<b class="fc"><i>78</i>&nbsp;    }</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    /**
+<i>81</i>&nbsp;     * Helper method for handling exception from actual writing
+<i>82</i>&nbsp;     * the processed data into the output file
+<i>83</i>&nbsp;     * @param writer
+<i>84</i>&nbsp;     * @param position
+<i>85</i>&nbsp;     */
+<i>86</i>&nbsp;    private void safeProcessAndWriteRecord ( final BufferedWriter writer , final Position position ) {
+<i>87</i>&nbsp;        try {
+<b class="fc"><i>88</i>&nbsp;            processAndWriteRecord(writer, position);</b>
+<b class="nc"><i>89</i>&nbsp;        } catch (IOException ioException) {</b>
+<b class="nc"><i>90</i>&nbsp;            logger.error(&quot;Exception while writing output &quot;, ioException);</b>
+<b class="fc"><i>91</i>&nbsp;        }</b>
+<b class="fc"><i>92</i>&nbsp;    }</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    /**
+<i>95</i>&nbsp;     * Helper method for writing the processed data into the output file
+<i>96</i>&nbsp;     * @param writer
+<i>97</i>&nbsp;     * @param position
+<i>98</i>&nbsp;     * @throws IOException
+<i>99</i>&nbsp;     */
+<i>100</i>&nbsp;    private void processAndWriteRecord ( final BufferedWriter writer , final Position position ) throws IOException {
+<b class="fc"><i>101</i>&nbsp;        final Optional &lt; String &gt; optionalOutput = process ( position );</b>
+<b class="fc"><i>102</i>&nbsp;        if ( optionalOutput.isPresent ( ) ) {</b>
+<b class="fc"><i>103</i>&nbsp;            final String outputData = optionalOutput.get ( );</b>
+<b class="fc"><i>104</i>&nbsp;            writer.write ( outputData );</b>
+<b class="fc"><i>105</i>&nbsp;            writer.newLine ( );</b>
+<i>106</i>&nbsp;        }
+<b class="fc"><i>107</i>&nbsp;    }</b>
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    /**
+<i>110</i>&nbsp;     * Helper Method for aggregating the ride data and calculate fare
+<i>111</i>&nbsp;     * once all the records of a ride are read then proceed with fare calculation
+<i>112</i>&nbsp;     * and finally ride object to string conversion is done
+<i>113</i>&nbsp;     * for writing into the output file
+<i>114</i>&nbsp;     * @param position
+<i>115</i>&nbsp;     * @return
+<i>116</i>&nbsp;     */
+<i>117</i>&nbsp;    private Optional&lt;String&gt; process(final Position position) {
+<b class="fc"><i>118</i>&nbsp;        return aggregator.aggregate(position)</b>
+<b class="fc"><i>119</i>&nbsp;                .map(this::calculateFare)</b>
+<b class="fc"><i>120</i>&nbsp;                .map(converter::convert);</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    /**
+<i>124</i>&nbsp;     * Helper Method for calculating the individual ride fare
+<i>125</i>&nbsp;     * @param ride
+<i>126</i>&nbsp;     * @return
+<i>127</i>&nbsp;     */
+<i>128</i>&nbsp;    private Ride calculateFare(final Ride ride) {
+<b class="fc"><i>129</i>&nbsp;        final double fare = fareCalculator.calculate(ride);</b>
+<b class="fc"><i>130</i>&nbsp;        ride.setFare(fare);</b>
+<b class="fc"><i>131</i>&nbsp;        return ride;</b>
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;}
 </div>
 </div>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2020-09-28 01:06</div>
+    <div style="float:right;">generated on 2020-09-28 14:44</div>
 </div>
 </body>
 </html>

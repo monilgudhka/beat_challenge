@@ -71,7 +71,31 @@ class FareCalculatorTest {
     }
 
     @Test
-    void calculateMethod_MaxSpeed_Test_05 ( ) {
+    void calculateMethod_AvgSpeedSpanningTimeFareCalculation_Test_05 ( ) {
+        //11PM - 3AM ride
+        Position position1 = new Position ( 1,37.966627,23.728263,1601162660 );
+        Position position2 = new Position ( 1,37.961403,23.721222,1601164767 );
+        Position position3 = new Position ( 1,37.913403,23.721222,1601165427 );
+        Position position4 = new Position ( 1,37.66,23.732,1601169860 );
+        Position position5 = new Position ( 1,37.45,23.12,1601173460 );
+        Position position6 = new Position ( 1,37.12,23.45,1601177060 );
+
+        List <Position> positionList = new ArrayList<>();
+        positionList.add(position1);
+        positionList.add(position2);
+        positionList.add(position3);
+        positionList.add(position4);
+        positionList.add(position5);
+        positionList.add(position6);
+
+        Ride ride = Mockito.mock ( Ride.class );
+        when(ride.getPositions ()).thenReturn(positionList);
+
+        assertEquals(179.28,fareCalculator.calculate ( ride ));
+    }
+
+    @Test
+    void calculateMethod_MaxSpeed_Test_06 ( ) {
         Position position1 = new Position ( 1,37.966627,23.728263,1405594966 );
         //invalid entry, U > 100kmph
         Position position2 = new Position ( 1,30.935597,20.728308,1405596212 );

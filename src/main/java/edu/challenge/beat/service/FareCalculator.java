@@ -79,6 +79,7 @@ public class FareCalculator {
          * If ride hour is between 5AM - 12PM then daytimeFare
          * otherwise nighttimeFare
          */
+        logger.debug ( "hour={} {} {}",hour,distance, timestamp );
         return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
                 ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance
                 : AppConstantsUtil.DAY_TIME_PER_KM_FARE * distance;
@@ -104,7 +105,7 @@ public class FareCalculator {
         final long startTime = source.getTimestamp();
         final long endTime = destination.getTimestamp();
 
-        final long difference = endTime - startTime;
+        final long difference = Math.abs(endTime - startTime);
         return (double) difference / SECOND_TO_HOURLY;
     }
 
