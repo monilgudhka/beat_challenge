@@ -9,8 +9,8 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class calculating fare for each ride considering its speed,
@@ -21,7 +21,7 @@ public class FareCalculator {
 
     private static final int SECOND_TO_HOURLY = 3600;
     private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
-    private static final Logger logger = LogManager.getLogger(FareCalculator.class);
+    private static final Logger logger = LoggerFactory.getLogger(FareCalculator.class);
 
     /**
      * Method for calculating fare for each ride

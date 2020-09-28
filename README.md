@@ -16,7 +16,7 @@
 1. Move to the directory where pom.xml exists
 2. Build jar using the command "mvn clean install"
 3. Once the jar is built run from the terminal using the below command
-4. java -cp target/beat-0.0.1-SNAPSHOT.jar edu.challenge.beat.BeatApplication
+4. java -cp target/beat-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.challenge.beat.BeatApplication
 5. Once the execution is successful then you should see the output in the "output.txt" file under the resources folder of the project
 
 

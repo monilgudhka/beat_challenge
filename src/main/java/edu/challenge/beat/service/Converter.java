@@ -3,8 +3,8 @@ package edu.challenge.beat.service;
 import edu.challenge.beat.model.Position;
 import edu.challenge.beat.model.Ride;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class converting the string record(from input file) into object
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 @RequiredArgsConstructor
 public class Converter {
 
-    private static final Logger logger = LogManager.getLogger(Converter.class);
+    private static final Logger logger = LoggerFactory.getLogger(Converter.class);
 
     /**
      * Method to convert string record data into Position object

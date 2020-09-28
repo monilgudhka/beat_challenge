@@ -14,8 +14,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class reading the input file, send data for processing
@@ -28,7 +28,7 @@ public class BeatChallenge {
     private final Converter converter;
     private final PositionAggregator aggregator;
     private final FareCalculator fareCalculator;
-    private static final Logger logger = LogManager.getLogger( BeatChallenge.class );
+    private static final Logger logger = LoggerFactory.getLogger(BeatChallenge.class);
 
     /**
      * @param inputFilePath
