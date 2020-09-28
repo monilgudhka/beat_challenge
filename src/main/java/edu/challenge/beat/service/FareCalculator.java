@@ -39,7 +39,7 @@ public class FareCalculator {
         //Get the first record as a source point of the ride
         Position source = positions.get(0);
 
-        //Iterate over all the positions of a ride
+        //Iterate over remaining positions of a ride
         for (int index = 1; index < positions.size(); index++) {
             final Position destination = positions.get(index);
 
@@ -64,7 +64,6 @@ public class FareCalculator {
     }
 
     /**
-     * Helper Method for fare calculation
      * Based on ride timings decide the fare
      * If ride hour is between 5AM - 12PM then daytimeFare
      * otherwise nighttimeFare
@@ -77,7 +76,7 @@ public class FareCalculator {
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
 
-        logger.debug ( "hour={} distance={} ts={}",hour,distance, timestamp );
+        logger.debug ( "hour={} distance={} ts={}",hour,distance,timestamp );
         return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
                 ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance
                 : AppConstantsUtil.DAY_TIME_PER_KM_FARE * distance;
