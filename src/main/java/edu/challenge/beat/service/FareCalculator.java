@@ -65,6 +65,9 @@ public class FareCalculator {
 
     /**
      * Helper Method for fare calculation
+     * Based on ride timings decide the fare
+     * If ride hour is between 5AM - 12PM then daytimeFare
+     * otherwise nighttimeFare
      * @param distance
      * @param timestamp
      * @return
@@ -74,11 +77,6 @@ public class FareCalculator {
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
 
-        /**
-         * Based on ride timings decide the fare
-         * If ride hour is between 5AM - 12PM then daytimeFare
-         * otherwise nighttimeFare
-         */
         logger.debug ( "hour={} distance={} ts={}",hour,distance, timestamp );
         return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
                 ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance
