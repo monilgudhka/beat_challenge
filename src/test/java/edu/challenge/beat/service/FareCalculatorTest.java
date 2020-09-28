@@ -71,7 +71,7 @@ class FareCalculatorTest {
     }
 
     @Test
-    void calculateMethod_AvgSpeedSpanningTimeFareCalculation_Test_05 ( ) {
+    void calculateMethod_AvgSpeedPMToAMTimeFareCalculation_Test_05 ( ) {
         //11PM - 3AM ride
         Position position1 = new Position ( 1,37.966627,23.728263,1601162660 );
         Position position2 = new Position ( 1,37.961403,23.721222,1601164767 );
@@ -110,5 +110,29 @@ class FareCalculatorTest {
         when(ride.getPositions ()).thenReturn(positionList);
 
         assertEquals(8.43,fareCalculator.calculate ( ride ));
+    }
+
+    @Test
+    void calculateMethod_AvgSpeedAMToAMTimeFareCalculation_Test_07 ( ) {
+        //12AM - 6AM ride
+        Position position1 = new Position ( 1,37.913403,23.721222,1601165427 );
+        Position position2 = new Position ( 1,37.66,23.732,1601169860 );
+        Position position3 = new Position ( 1,37.45,23.12,1601173460 );
+        Position position4 = new Position ( 1,37.12,23.45,1601177060 );
+        Position position5 = new Position ( 1,37.89,23.45,1601180580 );
+        Position position6 = new Position ( 1,37.92,23.45,1601184120 );
+
+        List <Position> positionList = new ArrayList<>();
+        positionList.add(position1);
+        positionList.add(position2);
+        positionList.add(position3);
+        positionList.add(position4);
+        positionList.add(position5);
+        positionList.add(position6);
+
+        Ride ride = Mockito.mock ( Ride.class );
+        when(ride.getPositions ()).thenReturn(positionList);
+
+        assertEquals(286.64,fareCalculator.calculate ( ride ));
     }
 }
