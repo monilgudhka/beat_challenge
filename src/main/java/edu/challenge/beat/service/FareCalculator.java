@@ -43,6 +43,8 @@ public class FareCalculator {
         for (int index = 1; index < positions.size(); index++) {
             final Position destination = positions.get(index);
 
+            logger.debug ( destination.toString () );
+
             final double distance = calcDistance(source, destination);
             final double time = calcTimeInHours(source, destination);
             final double speed = calcSpeed(distance, time);
