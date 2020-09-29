@@ -2,12 +2,22 @@
 
 # Assumptions
 1. Data is always sorted
+ - within ride sorting >> sort positions based on ts
+ - aggregator logic >> identify whether ride is ended >> some ride end flag
 2. Entries are positive
+ - assumption no negative >> otherwise as per business requirement (ignore)
+ - multiple format >> converter with multiple input format support
 3. No partial tuple
+ - according to business requirement (ignore)
 4. Ride fare is calculated at the end of the ride only, there is no intermediate stage
+ - might have duplicate values in output file per segment
 5. Input file records are comma-separated
+ - file format changes converter
 6. Input is from single file and output needs to be in single file
+ - per file BeatChallenge run method call
+ - multithreading per file
 7. Ideal time calcuation is considerd with minutes as well
+ - if 59min then consider 1hr
 
 # Installation and Setup
 - This is a Java project so make sure you have 'Java 8' and 'Maven' installed/configured on your machine.
@@ -41,9 +51,14 @@
 
 # Features Needed
 1. More parallelization to speed up the processing time
+ - trial and error based parallelization
 2. BlockingQueue approach or distruptor approach would have been possible with more time.
 3. More verbose unit testing
-
+4. strategy or template pattern for fare calc???
+5. two different types of converters >> input and output
+6. separate logic/classes for distance,speed and time 
+7. multi time zone
+8. logging
 
 # Design Approach
 1. Scan tuples serially
