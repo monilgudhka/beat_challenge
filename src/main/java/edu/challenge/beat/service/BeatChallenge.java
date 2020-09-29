@@ -14,6 +14,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class reading the input file, send data for processing
@@ -26,6 +28,7 @@ public class BeatChallenge {
     private final Converter converter;
     private final PositionAggregator aggregator;
     private final FareCalculator fareCalculator;
+    private static final Logger logger = LogManager.getLogger( BeatChallenge.class.getName());
 
     /**
      * @param inputFilePath
@@ -69,7 +72,7 @@ public class BeatChallenge {
                 executorService.shutdownNow();
             }
         } catch (InterruptedException interruptedException) {
-            System.out.println("Interrupt from thread pool termination "+ interruptedException);
+            logger.error("Interrupt from thread pool termination ", interruptedException);
             Thread.currentThread().interrupt();
         }
     }
@@ -84,7 +87,7 @@ public class BeatChallenge {
         try {
             processAndWriteRecord(writer, position);
         } catch (IOException ioException) {
-            System.out.println("Exception while writing output "+ ioException);
+            logger.error("Exception while writing output ", ioException);
         }
     }
 

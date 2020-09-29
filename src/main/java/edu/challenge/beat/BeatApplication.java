@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Main class
@@ -21,12 +23,14 @@ public class BeatApplication {
     private static final Properties PROPERTIES = new Properties();
     private static final String APP_CONFIG_PATH = "config.properties";
 
+    private static final Logger logger = LogManager.getLogger(BeatApplication.class.getName());
+
     /**
      * @param args
      * @throws IOException
      */
     public static void main(final String[] args) throws IOException {
-        System.out.println("Application execution started..");
+        logger.info("Application execution started..");
         long st = System.currentTimeMillis ();
 
         try(InputStream inputStream = Thread.currentThread ()
@@ -51,7 +55,7 @@ public class BeatApplication {
         challenge.run(inputFile, outputFile);
 
         long et = System.currentTimeMillis ();
-        System.out.println ("Execution ended! \n Time taken to run the task(in milliseconds)= "+(et - st));
+        logger.info ("Execution ended! \n Time taken to run the task(in milliseconds)= {} ",(et - st));
     }
 
 }

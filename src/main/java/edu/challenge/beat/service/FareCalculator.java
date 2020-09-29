@@ -9,6 +9,8 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class calculating fare for each ride considering its speed,
@@ -19,6 +21,7 @@ public class FareCalculator {
 
     private static final int SECOND_TO_HOURLY = 3600;
     private final DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    private static final Logger logger = LogManager.getLogger( FareCalculator.class.getName());
 
     /**
      * Method for calculating fare for each ride
@@ -40,9 +43,15 @@ public class FareCalculator {
         for (int index = 1; index < positions.size(); index++) {
             final Position destination = positions.get(index);
 
+            if(logger.isDebugEnabled ())
+                logger.debug ( destination.toString () );
+
             final double distance = calcDistance(source, destination);
             final double time = calcTimeInHours(source, destination);
             final double speed = calcSpeed(distance, time);
+
+            if(logger.isDebugEnabled ())
+                logger.debug("Distance={} Time={} Speed={}",distance,time,speed);
 
             if (speed <= AppConstantsUtil.MIN_SPEED ) {
                 idleTime += time;
@@ -73,6 +82,8 @@ public class FareCalculator {
                 .atOffset(ZoneOffset.UTC)
                 .toLocalTime().getHour();
 
+        if(logger.isDebugEnabled ())
+            logger.debug ( "hour={} distance={} ts={}",hour,distance,timestamp );
         return (AppConstantsUtil.RIDE_END_HOUR <= hour && hour <= AppConstantsUtil.RIDE_START_HOUR)
                 ? AppConstantsUtil.NIGHT_TIME_PER_KM_FARE * distance
                 : AppConstantsUtil.DAY_TIME_PER_KM_FARE * distance;

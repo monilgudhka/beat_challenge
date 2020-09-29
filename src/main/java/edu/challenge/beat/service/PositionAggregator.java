@@ -5,6 +5,8 @@ import edu.challenge.beat.model.Ride;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class aggregating the individual ride positions
@@ -15,6 +17,7 @@ public class PositionAggregator {
      * Ride instance used for creating individual ride objects
      */
     private Ride ride;
+    private static final Logger logger = LogManager.getLogger( PositionAggregator.class.getName());
 
     /**
      * Method for creating Ride and List of Positions of the ride
