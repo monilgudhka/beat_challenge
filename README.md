@@ -27,7 +27,7 @@
 1. Move to the directory where pom.xml exists
 2. Build jar using the command "mvn clean install"
 3. Once the jar is built, run from the terminal using the below command:
-4. java -cp target/beat-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.challenge.beat.BeatApplication
+4. java -cp target/beat-0.0.1-SNAPSHOT-jar-with-dependencies.jar edu.challenge.beat.BeatApplication -DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
 5. Once the execution is successful then you should see the output in the "output.txt" file under the resources folder of the project
 
 
@@ -52,7 +52,7 @@
 # Features Needed
 1. More parallelization to speed up the processing time
  - trial and error based parallelization
-2. BlockingQueue approach or distruptor approach would have been possible with more time.
+2. BlockingQueue/ConcurrentLinkedQueue approach or distruptor approach would have been possible with more time.
 3. More verbose unit testing
 4. strategy or template pattern for fare calc???
 5. two different types of converters >> input and output
@@ -84,3 +84,6 @@
 # CodeCoverage Report
 - CodeCoverage report can be found under the 'codecoverage/index.html' folder
 - Current coverage percentage: 90%
+
+
+
